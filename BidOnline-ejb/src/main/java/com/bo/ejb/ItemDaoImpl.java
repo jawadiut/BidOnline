@@ -45,6 +45,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void deleteItem(int itemId){
+        Item item = findItemById(itemId);
+        entityManager.remove(item);
     }
 
     @Override

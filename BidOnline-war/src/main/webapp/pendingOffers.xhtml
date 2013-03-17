@@ -37,12 +37,10 @@
                 <p:outputLabel value="\$ #{offers.itemStartingPrice}"/>
                 <p:outputLabel value="Fixed price:"/>
                 <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
-                <!--<p:outputLabel value="Offered by:"/>-->
-                <!--<p:outputLabel value=""/>-->
                 <p:commandLink value="Posted by" action="#{pendingOffersController.seeUserProfile(offers.userId)}"/>
+                <p:outputLabel value=""/>
                 <p:commandButton value="Activate Offer" action="#{pendingOffersController.activateOffer(offers.itemId)}"/>
-                <!--<p:commandButton value="Buy this item"-->
-                                 <!--action=""/>-->
+                <p:commandButton value="Close Offer" action="#{pendingOffersController.closeOffer(offers.itemId)}"/>
             </h:panelGrid>
         </p:dataGrid>
     </h:form>

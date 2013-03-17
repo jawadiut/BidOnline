@@ -16,11 +16,31 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
-    <title>My pending list</title>
+    <title>My pending offerlist</title>
 </h:head>
 
 <h:body>
+    <h:form>
+        <p:dataList value="#{myPendingListController.pendingItemList}" var="offers" columns="3" rows="12"
+                    paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="9,12,15">
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Title:"/>
+                <p:outputLabel value=" #{offers.itemTitle}"/>
+                <p:outputLabel value="Subtitle:"/>
+                <p:outputLabel value="#{offers.itemSubtitle}"/>
+                <p:outputLabel value="Starting price:"/>
+                <p:outputLabel value="\$ #{offers.itemStartingPrice}"/>
+                <p:outputLabel value="Fixed price:"/>
+                <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
 
+                <p:commandButton value="Cancel Offer" action="#{myPendingListController.cancelOffer(offers.itemId)}"/>
+                <!--<p:commandButton value="Buy this item"-->
+                <!--action=""/>-->
+            </h:panelGrid>
+        </p:dataList>
+    </h:form>
 </h:body>
 
 </html>

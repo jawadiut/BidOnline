@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,16 +25,22 @@ public class MyPendingListController {
     private User user;
     private Item item;
     private List<Item> itemList;
+    private List<Item> pendingItemList;
     @EJB
     private ItemDao itemDao;
     @EJB
     private UserDao userDao;
     @PostConstruct
     public void init(){
+        pendingItemList = new ArrayList<Item>();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);
         Integer loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
         user = userDao.getUserWithOfferList(loggedUserId);
+        itemList = user.getItems();
+        for(Item i: itemList){
+            if(i.getItemStatus().equals("pending"))pendingItemList.add(i);
+        }
     }
 
     public User getUser() {
@@ -46,5 +53,14 @@ public class MyPendingListController {
 
     public List<Item> getItemList() {
         return itemList;
+    }
+
+    public List<Item> getPendingItemList() {
+        return pendingItemList;
+    }
+
+    public String cancelOffer(Integer itemId){
+        itemDao.deleteItem(itemId);
+        return "myPendingList.xhtml?faces-redirect=true";
     }
 }

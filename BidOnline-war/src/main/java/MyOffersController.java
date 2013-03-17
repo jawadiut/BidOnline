@@ -29,6 +29,7 @@ public class MyOffersController {
     private String itemCategory;
     private String loggedUserId;
     private List<Item> items;
+    private List<Item> activeItems;
     //    private List<Offer> offers;
     @EJB
     private ItemDao itemDao;
@@ -39,15 +40,17 @@ public class MyOffersController {
 //    private OfferDao offerDao;
     @PostConstruct
     public void init() {
-        //offers = new ArrayList<Offer>();
-        //System.out.println("inside init....");
+
+        activeItems = new ArrayList<Item>();
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         user = userDao.getUserWithOfferList((Integer) httpSession.getAttribute("loggedUserId"));
         items = user.getItems();
-
+        for(Item i: items){
+            if(i.getItemStatus().equals("active"))activeItems.add(i);
+        }
         System.out.println("items..." + items);
     }
 
@@ -87,6 +90,10 @@ public class MyOffersController {
         return loggedUserId;
     }
 
+    public List<Item> getActiveItems() {
+        return activeItems;
+    }
+
     //    public List<Offer> getOffers() {
 //        return offers;
 //    }
@@ -104,15 +111,15 @@ public class MyOffersController {
     }
 
 
-    public String showItemDetails(Integer itemId) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-        httpSession.setAttribute("loggedItemId", itemId);
-        if (httpSession.getAttribute("loggedUserId") != null) {
-            return "bidRequest.xhtml?faces-redirect=true";
-        }
-        return "mustLogin.xhtml?faces-redirect=true";
-    }
+//    public String showItemDetails(Integer itemId) {
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+//        httpSession.setAttribute("loggedItemId", itemId);
+//        if (httpSession.getAttribute("loggedUserId") != null) {
+//            return "bidRequest.xhtml?faces-redirect=true";
+//        }
+//        return "mustLogin.xhtml?faces-redirect=true";
+//    }
 
     public String showItemList(String itemType){
         System.out.println("itemType...."+itemType);

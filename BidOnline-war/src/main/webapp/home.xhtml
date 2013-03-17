@@ -69,7 +69,11 @@
             <h:form>
                 <p:menubar style="color: #add8e6">
                     <p:submenu label="My Profile">
-                        <p:menuitem value="Offers" outcome="myOffers.xhtml"/>
+                        <p:submenu label="Offers">
+                            <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
+                            <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
+                        </p:submenu>
+
                         <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
                         <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
                         <p:menuitem value="Edit profile"/>

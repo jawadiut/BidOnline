@@ -103,6 +103,11 @@ public class PendingOffersController {
         return "pendingOffers.xhtml?faces-redirect=true";
     }
 
+    public String closeOffer(int itemId){
+        itemDao.deleteItem(itemId);
+        return "pendingOffers.xhtml?faces-redirect=true";
+    }
+
     public String seeUserProfile(int userId){
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -111,4 +116,6 @@ public class PendingOffersController {
         httpSession.setAttribute("userProfileId",userId);
         return "userProfile.xhtml?faces-redirect=true";
     }
+
+
 }
