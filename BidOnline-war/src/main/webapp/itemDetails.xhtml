@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 2/27/13
+  Time: 4:51 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+
+      >
+
+<h:head>
+    <title>Product Details</title>
+    <h:outputStylesheet library="css" name="itemDetails.css"/>
+</h:head>
+
+<h:body>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="120" resizable="false">
+            <h2 align="center">BidOnline</h2>
+            <div align="right">
+                <!--<h:form id="Form1">-->
+                    <!--<p:commandLink value="logout" action=""/>-->
+                <!--</h:form>-->
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h2>Enter item details:</h2>
+            <!--enctype="multipart/form-data"-->
+            <h:form id= "Form2" >
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="title" value="Title"/>
+                    <p:inputText id="title" required="true" requiredMessage="Title is required" size="26"
+                                 value="#{itemDetailsController.item.itemTitle}"/>
+                    <p:message for="title"/>
+                    <p:outputLabel for="subtitle" value="Subtitle"/>
+                    <p:inputText id="subtitle" required="true" requiredMessage="Subtitle is required" size="26"
+                                 value="#{itemDetailsController.item.itemSubtitle}"/>
+                    <p:message for="subtitle"/>
+                    <p:outputLabel for="startingPrice" value="Starting price"/>
+                    <p:inputText id="startingPrice" required="true" requiredMessage="Starting price is required"
+                                 size="26"
+                                 value="#{itemDetailsController.item.itemStartingPrice}"/>
+                    <p:message for="startingPrice"/>
+                    <p:outputLabel for="fixedPrice" value="Fixed price"/>
+                    <p:inputText id="fixedPrice" required="true" requiredMessage="Fixed price is required" size="26"
+                                 value="#{itemDetailsController.item.itemFixedPrice}"/>
+                    <p:message for="fixedPrice"/>
+                    <p:outputLabel for="condition" value="Condition"/>
+                    <p:selectOneMenu id="condition" required="true" requiredMessage="Condition is required"
+                                     maxlength="26" value="#{itemDetailsController.item.itemCondition}"
+                                     style="width: 280px">
+                        <f:selectItem itemValue="new" itemLabel="New"/>
+                        <f:selectItem itemValue="used" itemLabel="Used"/>
+                    </p:selectOneMenu>
+                    <p:message for="condition"/>
+                    <p:outputLabel for="description" value="Description"/>
+                    <p:inputTextarea id="description" required="true" requiredMessage="Description is required" rows="5"
+                                     cols="26" value="#{itemDetailsController.item.itemDescription}"/>
+                    <p:message for="description"/>
+                    <p:outputLabel for="itemType" value="Category"/>
+                    <p:selectOneMenu id="itemType" required="true" requiredMessage="Category is required"
+                                     maxlength="26" value="#{itemDetailsController.item.itemType}"
+                                     style="width: 280px">
+                        <f:selectItem itemValue="car" itemLabel="Car"/>
+                        <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
+                        <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
+                        <f:selectItem itemValue="house" itemLabel="House"/>
+                        <f:selectItem itemValue="land" itemLabel="Land"/>
+                        <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
+                        <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
+                        <f:selectItem itemValue="shari" itemLabel="Shari"/>
+                        <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
+                        <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
+                        <f:selectItem itemValue="gold" itemLabel="Gold"/>
+                        <f:selectItem itemValue="silver" itemLabel="Silver"/>
+                    </p:selectOneMenu>
+                    <p:message for="itemType"/>
+                    <p:outputLabel for="expireDate" value="Expire date"/>
+                    <p:calendar id="expireDate" required="true" requiredMessage="Expire date is required" size="26"
+                                value="#{itemDetailsController.item.itemExpireDate}"/>
+                    <p:message for="expireDate"/>
+                    <p:outputLabel for="image" value="Image"/>
+                    <p:fileUpload id="image" required="false" value="#{itemDetailsController.uploadedFile}"
+                                  mode="simple" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                    <p:message for="image"/>
+                    <!--<p:growl id="messages"/>-->
+                    <!--<p:calendar id="calender" value="Calender"/>-->
+                </h:panelGrid>
+                <p:commandButton value="Post" action="#{itemDetailsController.upload}" ajax="false"/>
+            </h:form>
+
+        </p:layoutUnit>
+    </p:layout>
+
+
+</h:body>
+
+</html>

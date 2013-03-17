@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 2/23/13
+  Time: 4:16 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Online-Bidder</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body styleClass="indexContainer">
+    <p:messages/>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="125" resizable="false" styleClass="northUnit">
+            <div style="padding-left: 20px">
+                <div class="title">
+                    <h2>BidOnline</h2>
+                </div>
+                <div class="login">
+                    <h:form>
+                        <h:panelGrid columns="3">
+                            <p:outputLabel for="userName" value="Username"/>
+                            <p:outputLabel for="password" value="Password"/>
+                            <p:outputLabel value=""/>
+                            <p:inputText id="userName" required="true" requiredMessage="Username is required" size="15"
+                                         value="#{indexController.user.userName}"/>
+                            <p:password id="password" required="true" requiredMessage="Password is required" size="15"
+                                        value="#{indexController.user.password}"/>
+
+                            <p:commandButton value="Login" action="#{indexController.loginUser}"/>
+                            <p:outputLabel value="Don't have an account"/>
+                            <h:link style="color: blue" outcome="signup.xhtml" value="sign up or register"/>
+                        </h:panelGrid>
+
+                    </h:form>
+
+                </div>
+
+            </div>
+            <!--<div class="signuplink">-->
+            <!---->
+            <!--</div>-->
+        </p:layoutUnit>
+
+
+        <p:layoutUnit position="center" size="200" resizable="false">
+            <div>
+
+                <div class="tieredMenu">
+
+                    <h:form>
+                        <p:tieredMenu>
+                            <p:submenu label="Vehicles">
+                                <p:menuitem value="Cars"
+                                            action="#{indexController.showItemList(indexController.items[0])}"/>
+                                <p:menuitem value="Motor-Cycles"
+                                            action="#{indexController.showItemList(indexController.items[1])}"/>
+                                <p:menuitem value="Auto-Rickshaw"
+                                            action="#{indexController.showItemList(indexController.items[2])}"/>
+                                <p:menuitem value="Others"
+                                            action="#{indexController.showItemList(indexController.items[3])}"/>
+                            </p:submenu>
+                            <p:submenu label="Property">
+                                <p:menuitem value="House"
+                                            action="#{indexController.showItemList(indexController.items[4])}"/>
+                                <p:menuitem value="Land"
+                                            action="#{indexController.showItemList(indexController.items[5])}"/>
+                            </p:submenu>
+                            <p:submenu label="Wearings">
+                                <p:menuitem value="Shirt"
+                                            action="#{indexController.showItemList(indexController.items[6])}"/>
+                                <p:menuitem value="Baby wearings"
+                                            action="#{indexController.showItemList(indexController.items[7])}"/>
+                                <p:menuitem value="Shari"
+                                            action="#{indexController.showItemList(indexController.items[8])}"/>
+                                <p:menuitem value="Shoes"
+                                            action="#{indexController.showItemList(indexController.items[9])}"/>
+                            </p:submenu>
+                            <p:submenu label="Jewelry">
+                                <p:menuitem value="Diamond"
+                                            action="#{indexController.showItemList(indexController.items[10])}"/>
+                                <p:menuitem value="Silver"
+                                            action="#{indexController.showItemList(indexController.items[11])}"/>
+                                <p:menuitem value="Gold"
+                                            action="#{indexController.showItemList(indexController.items[12])}"/>
+                            </p:submenu>
+                            <p:submenu label="Others">
+                                <p:menuitem value="Food"
+                                            action="#{indexController.showItemList(indexController.items[13])}"/>
+                            </p:submenu>
+                        </p:tieredMenu>
+                    </h:form>
+
+                </div>
+
+                <div style="float: left;padding-left: 70px">
+                    <h:form>
+                        <p:dataGrid value="#{indexController.itemList}" var="offers" columns="3" rows="12"
+                                    paginator="true"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="9,12,15">
+                            <!--<ui:param name="myVar" value="0"/>-->
+                            <!--<p:graphicImage value="" height="200" width="200"/>-->
+                            <div style="background-color: #ffe4c4">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="Serial No:"/>
+                                    <p:outputLabel value=" #{offers.itemId}"/>
+                                    <p:outputLabel value="Item name:"/>
+                                    <p:outputLabel value="#{offers.itemTitle}"/>
+                                    <p:outputLabel value="Fixed price:"/>
+                                    <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+                                    <p:commandLink value="Posted By"
+                                                   action="#{indexController.seeUserProfile(offers.userId)}"/>
+                                    <p:commandButton value="Buy this item"
+                                                     action="#{indexController.offeredItemDetails(offers.itemId)}"/>
+
+                                </h:panelGrid>
+                            </div>
+                        </p:dataGrid>
+                    </h:form>
+                </div>
+            </div>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+
+</html>

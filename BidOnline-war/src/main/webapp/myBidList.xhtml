@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/7/13
+  Time: 4:50 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>My Bidlist</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+    <h1>BidOnline</h1>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100">
+            <h:form>
+                <div style="padding-left: 10px;padding-right: 10px">
+                    <div>
+                        <h2 style="color: #d2691e">BidOnline</h2>
+                    </div>
+                    <div class="logout">
+                        <p:commandButton value="logout" action="#{homeController.logout}"/>
+                    </div>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h2>My Bidlist</h2>
+            <h:form>
+                <div style="width: 400px">
+
+                    <p:dataList value="#{myBidListController.itemList}" var="bids"
+                                paginator="true" rows="5" effectSpeed="fast"
+                                paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15" type="none" varStatus="loop"
+                            >
+                        <div style="background-color: #ffe4c4">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Uploaded on:"/>
+                                <p:outputLabel value="#{bids.itemUploadDate}"/>
+                                <p:outputLabel value="Serial No:"/>
+                                <p:outputLabel value=" #{bids.itemId}"/>
+                                <p:outputLabel value="Offer No:"/>
+                                <p:outputLabel value="#{bids.itemTitle}"/>
+                                <p:outputLabel value="Starting price:"/>
+                                <p:outputLabel value="#{bids.itemStartingPrice}"/>
+                                <p:outputLabel value="Your bid:"/>
+                                <p:outputLabel value="#{myBidListController.bidList[loop.index].bidPrice}"/>
+                            </h:panelGrid>
+                        </div>
+                        <p:spacer/>
+                    </p:dataList>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/16/13
+  Time: 9:48 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Pending Offers</title>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <p:dataGrid value="#{pendingOffersController.itemList}" var="offers" columns="3" rows="12"
+                    paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="9,12,15">
+            <!--<ui:param name="myVar" value="0"/>-->
+            <!--<p:graphicImage value="" height="200" width="200"/>-->
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Title:"/>
+                <p:outputLabel value=" #{offers.itemTitle}"/>
+                <p:outputLabel value="Subtitle:"/>
+                <p:outputLabel value="#{offers.itemSubtitle}"/>
+                <p:outputLabel value="Starting price:"/>
+                <p:outputLabel value="\$ #{offers.itemStartingPrice}"/>
+                <p:outputLabel value="Fixed price:"/>
+                <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+                <!--<p:outputLabel value="Offered by:"/>-->
+                <!--<p:outputLabel value=""/>-->
+                <p:commandLink value="Posted by" action="#{pendingOffersController.seeUserProfile(offers.userId)}"/>
+                <p:commandButton value="Activate Offer" action="#{pendingOffersController.activateOffer(offers.itemId)}"/>
+                <!--<p:commandButton value="Buy this item"-->
+                                 <!--action=""/>-->
+            </h:panelGrid>
+        </p:dataGrid>
+    </h:form>
+</h:body>
+
+</html>

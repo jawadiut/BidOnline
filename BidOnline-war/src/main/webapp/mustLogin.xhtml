@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/10/13
+  Time: 7:22 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>you must login</title>
+</h:head>
+
+<h:body style="padding-left: 200px;padding-right: 200px">
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="110" resizable="false">
+            <div style="padding-left: 20px">
+            <h2 style="color: RED">BidOnline</h2>
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="center" resizable="false">
+            <h:form>
+            <div align="left" style="background-color: #f0e68c;padding-left:30px;padding-top:30px;height:350px;width: 350px">
+                <div>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="userName" value="Username"/>
+                        <p:inputText id="userName" required="true" requiredMessage="Username is required" size="15"
+                                     value="#{indexController.user.userName}"/>
+                        <p:outputLabel for="password" value="Password"/>
+                        <p:password id="password" required="true" requiredMessage="Password is required" size="15"
+                                    value="#{indexController.user.password}"/>
+                        <p:commandButton value="Login" action="#{indexController.loginUser}"/>
+                        <p:outputLabel value=""/>
+                    </h:panelGrid>
+                    <p:spacer height="30px"/>
+                </div>
+                <div>
+                    <h:panelGrid columns="2">
+                    <p:outputLabel value="Don't have an account"/>
+                        <p:spacer width="10px"/>
+                    <h:link style="color: blue" outcome="signup.xhtml" value="sign up or register"/>
+                    </h:panelGrid>
+                </div>
+            </div>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+
+</html>

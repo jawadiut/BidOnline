@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>BidOnline</artifactId>
+        <groupId>BidOnline</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>BidOnline-app</artifactId>
+    <packaging>ear</packaging>
+
+
+    <name>BidOnline-app Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>BidOnline</groupId>
+            <artifactId>BidOnline-ejb</artifactId>
+            <type>ejb</type>
+        </dependency>
+
+        <dependency>
+            <groupId>BidOnline</groupId>
+            <artifactId>BidOnline-war</artifactId>
+            <type>war</type>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+
+        <finalName>BidOnline-app</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.7</version>
+
+                <configuration>
+                    <version>5</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+
+                    <modules>
+                        <ejbModule>
+                            <groupId>BidOnline</groupId>
+                            <artifactId>BidOnline-ejb</artifactId>
+                        </ejbModule>
+
+                        <webModule>
+                            <groupId>BidOnline</groupId>
+                            <artifactId>BidOnline-war</artifactId>
+                            <contextRoot>/BidOnline</contextRoot>
+                        </webModule>
+                    </modules>
+
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

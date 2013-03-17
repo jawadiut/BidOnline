@@ -1,0 +1,49 @@
+.indexContainer{
+    padding-left: 100px;
+    background-color: #f0fff0;
+    padding-right: 100px;
+}
+.SignUp{
+    float: right;
+}
+.login{
+    float: right;
+    background-color: #fafad2;
+    border-left-width: 20px;
+    border-right-width: 60px;
+}
+.mType{
+    float: left;
+    background-color: #fffacd;
+    margin-left: 10px;
+}
+.signuplink{
+    float: right;
+}
+.menubar{
+    background-color: #add8e6;
+}
+.title{
+    float: left;
+
+}
+.logout{
+    margin-top: -55px;
+    float:right;
+}
+.tieredMenu{
+    float: left;
+}
+/*.northUnit{*/
+    /*background-color: #fffacd !important;*/
+
+/*}*/
+/*.ui-layout-unit{*/
+    /*background-color: #fffacd;*/
+/*}*/
+/*.div.ui-layout-unit{*/
+    /*background-color: red;*/
+/*}*/
+/*.ui-layout-north .ui-layout-unit-content {*/
+    /*background-color: red ;*/
+/*}*/

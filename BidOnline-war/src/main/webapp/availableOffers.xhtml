@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/6/13
+  Time: 12:32 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<h:head>
+    <title>Available Offers</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100">
+            <h:form>
+                <div style="padding-left: 10px;padding-right: 10px">
+                    <div>
+                        <h2 style="color: #d2691e">BidOnline</h2>
+                    </div>
+                    <div class="logout">
+                        <p:commandButton value="logout" action="#{availableOffersController.logout}"/>
+                    </div>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h:form>
+                <div style="width: 700px;height: 200px">
+                    <p:dataGrid value="#{availableOffersController.itemList}" var="offers" columns="3" rows="12"
+                                paginator="true"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="9,12,15">
+                        <!--<ui:param name="myVar" value="0"/>-->
+                        <!--<p:graphicImage value="" height="200" width="200"/>-->
+                        <div style="background-color: #ffe4c4">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Serial No:"/>
+                                <p:outputLabel value=" #{offers.itemId}"/>
+                                <p:outputLabel value="Item name:"/>
+                                <p:outputLabel value="#{offers.itemTitle}"/>
+                                <p:outputLabel value="Fixed price:"/>
+                                <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+                                <p:commandLink value="Posted By"
+                                               action="#{availableOffersController.seeUserProfile(offers.userId)}"/>
+                                <p:commandButton value="Buy this item"
+                                                 action="#{availableOffersController.offeredItemDetails(offers.itemId)}"/>
+
+                            </h:panelGrid>
+                        </div>
+                    </p:dataGrid>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
+    <!--shishur jonno valobasha-->
+
+</h:body>
+
+</html>

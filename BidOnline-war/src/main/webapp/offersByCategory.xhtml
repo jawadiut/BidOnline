@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/16/13
+  Time: 5:12 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Top #{offersByCategoryController.itemCategory}s</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100">
+            <div>
+                <div style="float: left">
+                    <h2 style="color: #d2691e">BidOnline</h2>
+                </div>
+                <div style="padding-left: 500px;float: right;padding-top: 20px">
+                    <h:form id="north1">
+                        <h:panelGrid columns="5">
+                            <p:outputLabel value="Select category" style="color: red"/>
+                            <p:selectOneMenu value="#{offersByCategoryController.itemCategory}">
+                                <f:selectItem itemValue="car" itemLabel="car"/>
+                                <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
+                                <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
+                                <f:selectItem itemValue="house" itemLabel="House"/>
+                                <f:selectItem itemValue="land" itemLabel="Land"/>
+                                <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
+                                <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
+                                <f:selectItem itemValue="shari" itemLabel="Shari"/>
+                                <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
+                                <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
+                                <f:selectItem itemValue="silver" itemLabel="Silver"/>
+                                <f:selectItem itemValue="gold" itemLabel="Gold"/>
+                                <f:selectItem itemValue="others" itemLabel="Others"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Search"
+                                             action="#{offersByCategoryController.showItemList(offersByCategoryController.itemCategory)}"/>
+                            <p:spacer width="30px"/>
+
+                            <p:commandButton rendered="#{offersByCategoryController.loggedUserId != null}"
+                                             value="logout" action="#{offersByCategoryController.logout}"/>
+
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h:form rendered="#{offersByCategoryController.loggedUserId != null}">
+                <p:menubar style="color: #add8e6">
+                    <p:submenu label="My Profile">
+                        <p:menuitem value="Offers" outcome="myOffers.xhtml"/>
+                        <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
+                        <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
+                        <p:menuitem value="Edit profile"/>
+                    </p:submenu>
+                    <p:submenu label="Available offers">
+                        <!--<p:menuitem rendered="" value="Activate offers" outcome="pendingOffers.xhtml"/>-->
+                        <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
+                        <p:menuitem value="Top offers"/>
+                    </p:submenu>
+                    <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
+
+                </p:menubar>
+            </h:form>
+            <p:spacer height="10px"/>
+            <div style="width: 400px;height: 200px">
+                <p:dataList value="#{offersByCategoryController.itemList}" var="items" id="bidList"
+                            paginator="true" rows="5" effectSpeed="fast"
+                            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="5,10,15" type="none" style="width: 100px">
+                    <div style="background-color: #ffe4c4">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Item id" style="color: red"/>
+                            <p:commandLink value="#{items.itemId}"
+                                           action="#{offersByCategoryController.showItemDetails(items.itemId)}"/>
+                            <p:outputLabel value="Title" style="color: red"/>
+                            <p:outputLabel value="#{items.itemTitle}"/>
+                            <p:outputLabel value="Starting price" style="color: red"/>
+                            <p:outputLabel value="#{items.itemStartingPrice}"/>
+                            <p:outputLabel value="Fixed price" style="color: red"/>
+                            <p:outputLabel value="#{items.itemFixedPrice}"/>
+                            <p:outputLabel value="Upload date" style="color: red"/>
+                            <p:outputLabel value="#{items.itemUploadDate}"/>
+                            <p:outputLabel value="Bid history" style="color: red"/>
+                            <p:outputLabel value="#{items.itemBidHistory}"/>
+                        </h:panelGrid>
+                    </div>
+                    <p:spacer height="10px"/>
+                </p:dataList>
+            </div>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+
+</html>

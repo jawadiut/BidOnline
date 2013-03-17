@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/13/13
+  Time: 7:00 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Total bids</title>
+</h:head>
+
+<h:body>
+    <p:dataList value="#{itemWiseBidListController.bidList}" var="bids" type="ordered" varStatus="loop">
+        <h:panelGrid columns="2">
+            <p:outputLabel value="Uploaded on:" style="color: red"/>
+            <p:outputLabel value="#{bids.bidDate}"/>
+            <p:outputLabel value="Bid price:" style="color: red"/>
+            <p:outputLabel value=" #{bids.bidPrice}"/>
+            <p:outputLabel value="Serial No:" style="color: red"/>
+            <p:outputLabel value="#{bids.bidId}" />
+            <p:outputLabel value="Bid by:" style="color: red"/>
+            <h:form>
+            <p:commandLink value="#{itemWiseBidListController.bidderList[loop.index].userName}"
+                    action="#{itemWiseBidListController.showUserProfile(bids.userId)}"/>
+            </h:form>
+            <!--<p:outputLabel value="Starting price:"/>-->
+            <!--<p:outputLabel value=""/>-->
+        </h:panelGrid>
+    </p:dataList>
+
+</h:body>
+
+</html>
