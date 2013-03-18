@@ -58,6 +58,8 @@ public class Item implements Serializable {
 
     private String itemStatus;
 
+    private Integer itemLatestBid;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "itemId")
     private List<Bid> bids;
@@ -167,6 +169,14 @@ public class Item implements Serializable {
 
     public void setItemStatus(String itemStatus) {
         this.itemStatus = itemStatus;
+    }
+
+    public Integer getItemLatestBid() {
+        return itemLatestBid;
+    }
+
+    public void setItemLatestBid(Integer itemLatestBid) {
+        this.itemLatestBid = itemLatestBid;
     }
 
     public List<Bid> getBids() {

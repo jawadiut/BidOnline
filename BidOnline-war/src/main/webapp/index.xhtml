@@ -30,6 +30,7 @@
                 </div>
                 <div class="login">
                     <h:form>
+                        <p:messages for="userName"/>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="userName" value="Username"/>
                             <p:outputLabel for="password" value="Password"/>
@@ -38,7 +39,6 @@
                                          value="#{indexController.user.userName}"/>
                             <p:password id="password" required="true" requiredMessage="Password is required" size="15"
                                         value="#{indexController.user.password}"/>
-
                             <p:commandButton value="Login" action="#{indexController.loginUser}"/>
                             <p:outputLabel value="Don't have an account"/>
                             <h:link style="color: blue" outcome="signup.xhtml" value="sign up or register"/>

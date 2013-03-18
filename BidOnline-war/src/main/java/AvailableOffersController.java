@@ -30,6 +30,9 @@ public class AvailableOffersController {
     private List<Integer> offerList;
     private User user;
     private Item item;
+    private Integer loggedUserId;
+    private String loggedUserName;
+    private String itemCategory;
     //private NewItem newItem;
     //private Offer offer;
     //private List<Offer> offers;
@@ -52,6 +55,12 @@ public class AvailableOffersController {
     public void init() {
         item = new Item();
         itemList = itemDao.getItems();
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
+
+        loggedUserName = (String) httpSession.getAttribute("loggedUserName");
     }
 
     public List<Integer> getOfferList() {
@@ -78,7 +87,29 @@ public class AvailableOffersController {
         this.dbImage = dbImage;
     }
 
+    public Integer getLoggedUserId() {
+        return loggedUserId;
+    }
 
+    public void setLoggedUserId(Integer loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
+
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    public void setLoggedUserName(String loggedUserName) {
+        this.loggedUserName = loggedUserName;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+    }
 
     public StreamedContent getDbImg() {
         return dbImg;

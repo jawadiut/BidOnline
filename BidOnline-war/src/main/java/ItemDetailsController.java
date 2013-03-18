@@ -33,14 +33,13 @@ public class ItemDetailsController {
 
     private User user;
     private Item item;
-    //private Offer offer;
+
     protected final Log log = LogFactory.getLog(getClass());
     @EJB
     private ItemDao itemDao;
     @EJB
     private UserDao userDao;
-//    @EJB
-//    private OfferDao offerDao;
+
     private List<Item> Items;
     private UploadedFile uploadedFile;
     public User getUser() {
@@ -71,8 +70,6 @@ public class ItemDetailsController {
     public void init(){
         if(item == null){
 
-//            offer = new Offer();
-
             item = new Item();
 
             FacesContext context = FacesContext.getCurrentInstance();
@@ -91,17 +88,13 @@ public class ItemDetailsController {
 
 
     public String upload(){
-        System.out.println("upload item available!!!!!" + item);
-//        System.out.println("uploadedFILE>>>>>"+uploadedFile);
-////        byte[] file = uploadedFile.getContents();
-//        item.setItemImage(uploadedFile.getContents());
+
         item.setItemUploadDate(Calendar.getInstance().getTime());
         item.setItemBidHistory(0);
+        item.setItemLatestBid(0);
         item.setItemStatus("pending");
         itemDao.uploadItem(user.getUserId(),item);
-//        offer.setOfferStatus("pending");
-//        offerDao.uploadOffer();
-        //user.getItems().add(item);
+
         return "home.xhtml?faces-redirect=true";
     }
 
@@ -114,6 +107,6 @@ public class ItemDetailsController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
-//        System.out.println(user.getUserName()+);
+
     }
 }

@@ -46,6 +46,8 @@
                         <p:outputLabel value="#{bidRequestController.item.itemSubtitle}"/>
                         <p:outputLabel value="Description" style="color: red"/>
                         <p:outputLabel value="#{bidRequestController.item.itemDescription}"/>
+                        <p:outputLabel value="Starting price" style="color: red"/>
+                        <p:outputLabel value="#{bidRequestController.item.itemStartingPrice}"/>
                         <p:outputLabel value="Fixed price" style="color: red"/>
                         <p:outputLabel value="#{bidRequestController.item.itemFixedPrice}"/>
                         <p:outputLabel value="Condition" style="color: red"/>
@@ -56,10 +58,30 @@
                         <p:outputLabel value="#{bidRequestController.item.itemExpireDate}"/>
                         <p:outputLabel value="Category" style="color: red"/>
                         <p:outputLabel value="#{bidRequestController.item.itemType}"/>
+                        <p:outputLabel rendered="#{bidRequestController.item.itemLatestBid>0}" value="Latest Bid"
+                                       style="color: red"/>
+                        <p:outputLabel rendered="#{bidRequestController.item.itemLatestBid>0}"
+                                       value="#{bidRequestController.item.itemLatestBid}"/>
                         <p:outputLabel for="bidPrice" value="Enter bid price:" style="color: red"/>
-                        <p:inputText id="bidPrice" value="#{bidRequestController.bid.bidPrice}" size="10"/>
-                        <p:commandButton value="Bid now"
-                                         action="#{bidRequestController.bidForThisItem}"/>
+                        <p:inputText id="bidPrice" value="#{bidRequestController.bid.bidPrice}" size="10"
+                                     validatorMessage="Higher bid already there">
+                            <f:validateLongRange minimum="#{bidRequestController.item.itemLatestBid}"/>
+                        </p:inputText>
+                        <p:message for="bidPrice"/>
+                        <c:if test="${bidRequestController.loggedUserId != bidRequestController.item.userId}">
+                            hello
+                            <c:choose>
+                                <c:when test="${bidRequestController.newBid==1}">
+                                    <p:commandButton value="Bid now"
+                                                     action="#{bidRequestController.bidForThisItem}"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <p:commandButton value="Bid again"
+                                                     action="#{bidRequestController.bidAgainForThisItem}"/>
+
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </h:panelGrid>
                 </div>
             </h:form>

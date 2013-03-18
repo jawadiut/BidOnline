@@ -37,8 +37,37 @@
             </h:form>
         </p:layoutUnit>
         <p:layoutUnit position="center">
+            <div>
+                <h:form>
+                    <p:menubar style="color: #add8e6">
+                        <p:submenu label="My Profile">
+                            <p:submenu label="Offers">
+                                <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
+                                <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
+                            </p:submenu>
+
+                            <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
+                            <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
+                            <p:menuitem value="Edit profile"/>
+                        </p:submenu>
+                        <p:submenu label="Available offers">
+                            <p:menuitem rendered="#{homeController.userRole == 0}" value="Activate offers"
+                                        outcome="pendingOffers.xhtml"/>
+                            <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
+                            <p:menuitem value="Top offers"/>
+                        </p:submenu>
+                        <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
+
+                    </p:menubar>
+                </h:form>
+            </div>
+            <p:spacer height="10px"/>
             <h:form>
-                <div style="width: 700px;height: 200px">
+                <div align="center">
+                    <h2 style="color: #006400">Active offers</h2>
+                </div>
+                <div style="width: 400px;height: 200px">
+
                     <p:dataGrid value="#{availableOffersController.itemList}" var="offers" columns="3" rows="12"
                                 paginator="true"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -55,9 +84,8 @@
                                 <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
                                 <p:commandLink value="Posted By"
                                                action="#{availableOffersController.seeUserProfile(offers.userId)}"/>
-                                <p:commandButton value="Buy this item"
+                                <p:commandButton rendered="#{availableOffersController.loggedUserId != offers.userId}" value="Buy this item"
                                                  action="#{availableOffersController.offeredItemDetails(offers.itemId)}"/>
-
                             </h:panelGrid>
                         </div>
                     </p:dataGrid>

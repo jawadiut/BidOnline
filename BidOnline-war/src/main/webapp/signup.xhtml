@@ -19,76 +19,94 @@
 </h:head>
 
 <h:body>
-    <h1>Sign Up</h1>
-    <h:form id="Form1">
-        <!--<p:messages/>-->
 
-        <h:panelGrid columns="3">
-            <p:outputLabel for="firstName" value="First name"/>
-            <p:inputText id="firstName" required="true" requiredMessage="First name is required" size="26"
-                         value="#{signupController.user.firstName}"/>
-            <p:message for="firstName"/>
-            <p:outputLabel for="lastName" value="Last name"/>
-            <p:inputText id="lastName" required="true" requiredMessage="Last name is required" size="26"
-                         value="#{signupController.user.lastName}"/>
-            <p:message for="lastName"/>
-            <p:outputLabel for="userName" value="Username"/>
-            <p:inputText id="userName" required="true" requiredMessage="Name is required" size="26"
-                         value="#{signupController.user.userName}"/>
-            <p:message for="userName"/>
-            <p:outputLabel for="email" value="E-mail"/>
-            <p:inputText id="email" required="true" requiredMessage="E-mail is required" size="26"
-                         value="#{signupController.user.email}"
-                    validatorMessage="invalid e-mail format">
-                <f:validateRegex
-                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-            </p:inputText>
-            <p:message for="email"/>
-            <p:outputLabel for="password1" value="Password"/>
-            <p:password id="password1" required="true" requiredMessage="Password is required" size="26"
-                        value="#{signupController.user.password}"/>
-            <p:message for="password1"/>
-            <p:outputLabel for="password2" value="Confirm password"/>
-            <p:password id="password2" required="true" requiredMessage="Confirm password is required" size="26"
-                        />
-            <p:message for="password2"/>
-            <p:outputLabel for="country" value="Country"/>
-            <p:selectOneMenu id="country" required="true" requiredMessage="Select a country"
-                             maxlength="26" value="#{signupController.user.country}"
-                             style="width: 280px">
-                <f:selectItem itemValue="Argentina" itemLabel="Argentina"/>
-                <f:selectItem itemValue="Bangladesh" itemLabel="Bangladesh"/>
-                <f:selectItem itemValue="Bahrain" itemLabel="Bahrain"/>
-                <f:selectItem itemValue="Chille" itemLabel="Chille"/>
-                <f:selectItem itemValue="Denmark" itemLabel="Denmark"/>
-                <f:selectItem itemValue="England" itemLabel="England"/>
-                <f:selectItem itemValue="France" itemLabel="France"/>
-                <f:selectItem itemValue="Germany" itemLabel="Germany"/>
-                <f:selectItem itemValue="Honduras" itemLabel="Honduras"/>
-                <f:selectItem itemValue="Italy" itemLabel="Italy"/>
-                <f:selectItem itemValue="Jamaica" itemLabel="Jamaica"/>
-                <f:selectItem itemValue="USA" itemLabel="USA"/>
-            </p:selectOneMenu>
-            <p:message for="country"/>
-            <p:outputLabel for="psaddress" value="Present address"/>
-            <p:inputTextarea id="psaddress" required="true" requiredMessage="Present address is required" rows="5"
-                             cols="30"
-                             value="#{signupController.user.presentAddress}"/>
-            <p:message for="psaddress"/>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="100">
+            <h:form>
+                <div style="padding-left: 10px;padding-right: 10px">
+                    <div>
+                        <h2 style="color: #d2691e">BidOnline</h2>
+                    </div>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h2>Sign Up</h2>
+            <h:form id="Form1">
+                <!--<p:messages/>-->
 
-            <p:outputLabel for="pmaddress" value="Permanent address"/>
-            <p:inputTextarea id="pmaddress" required="true" requiredMessage="Permanent address is required" rows="5"
-                             cols="30"
-                             value="#{signupController.user.permanentAddress}"/>
-            <p:message for="pmaddress"/>
-            <p:outputLabel for="phone" value="Phone"/>
-            <p:inputText id="phone" required="true" requiredMessage="Phone is required" size="26"
-                         value="#{signupController.user.phoneNumber}"/>
-            <p:message for="phone"/>
+                <h:panelGrid columns="3">
+                    <p:outputLabel for="firstName" value="First name"/>
+                    <p:inputText id="firstName" required="true" requiredMessage="First name is required" size="26"
+                                 value="#{signupController.user.firstName}"/>
+                    <p:message for="firstName"/>
+                    <p:outputLabel for="lastName" value="Last name"/>
+                    <p:inputText id="lastName" required="true" requiredMessage="Last name is required" size="26"
+                                 value="#{signupController.user.lastName}"/>
+                    <p:message for="lastName"/>
+                    <p:outputLabel for="userName" value="Username"/>
+                    <p:inputText id="userName" required="true" requiredMessage="Name is required" size="26"
+                                 value="#{signupController.user.userName}" validatorMessage="username too short">
+                        <f:validateLength minimum="4"/>
+                    </p:inputText>
+                    <p:message for="userName"/>
+                    <p:outputLabel for="email" value="E-mail"/>
+                    <p:inputText id="email" required="true" requiredMessage="E-mail is required" size="26"
+                                 value="#{signupController.user.email}"
+                                 validatorMessage="invalid e-mail format">
+                        <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                    </p:inputText>
+                    <p:message for="email"/>
+                    <p:outputLabel for="password1" value="Password"/>
+                    <p:password id="password1" required="true" requiredMessage="Password is required" size="26"
+                                value="#{signupController.user.password}"/>
+                    <p:message for="password1"/>
+                    <p:outputLabel for="password2" value="Confirm password"/>
+                    <p:password id="password2" required="true" requiredMessage="Confirm password is required" size="26"
+                            />
+                    <p:message for="password2"/>
+                    <p:outputLabel for="country" value="Country"/>
+                    <p:selectOneMenu id="country" required="true" requiredMessage="Select a country"
+                                     maxlength="26" value="#{signupController.user.country}"
+                                     style="width: 280px">
+                        <f:selectItem itemValue="Argentina" itemLabel="Argentina"/>
+                        <f:selectItem itemValue="Bangladesh" itemLabel="Bangladesh"/>
+                        <f:selectItem itemValue="Bahrain" itemLabel="Bahrain"/>
+                        <f:selectItem itemValue="Chille" itemLabel="Chille"/>
+                        <f:selectItem itemValue="Denmark" itemLabel="Denmark"/>
+                        <f:selectItem itemValue="England" itemLabel="England"/>
+                        <f:selectItem itemValue="France" itemLabel="France"/>
+                        <f:selectItem itemValue="Germany" itemLabel="Germany"/>
+                        <f:selectItem itemValue="Honduras" itemLabel="Honduras"/>
+                        <f:selectItem itemValue="Italy" itemLabel="Italy"/>
+                        <f:selectItem itemValue="Jamaica" itemLabel="Jamaica"/>
+                        <f:selectItem itemValue="USA" itemLabel="USA"/>
+                    </p:selectOneMenu>
+                    <p:message for="country"/>
+                    <p:outputLabel for="psaddress" value="Present address"/>
+                    <p:inputTextarea id="psaddress" required="true" requiredMessage="Present address is required"
+                                     rows="5"
+                                     cols="26"
+                                     value="#{signupController.user.presentAddress}"/>
+                    <p:message for="psaddress"/>
 
-        </h:panelGrid>
-        <p:commandButton value="Register" action="#{signupController.saveUser}" ajax="false"/>
-    </h:form>
+                    <p:outputLabel for="pmaddress" value="Permanent address"/>
+                    <p:inputTextarea id="pmaddress" required="true" requiredMessage="Permanent address is required"
+                                     rows="5"
+                                     cols="26"
+                                     value="#{signupController.user.permanentAddress}"/>
+                    <p:message for="pmaddress"/>
+                    <p:outputLabel for="phone" value="Phone"/>
+                    <p:inputText id="phone" required="true" requiredMessage="Phone is required" size="26"
+                                 value="#{signupController.user.phoneNumber}"/>
+                    <p:message for="phone"/>
+
+                </h:panelGrid>
+                <p:commandButton value="Register" action="#{signupController.saveUser}" ajax="false"/>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
 </h:body>
 
 </html>

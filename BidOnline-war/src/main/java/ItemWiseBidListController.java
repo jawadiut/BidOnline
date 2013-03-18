@@ -101,6 +101,7 @@ public class ItemWiseBidListController {
         this.itemCategory = itemCategory;
     }
 
+
     public Integer getLoggedUserId() {
         return loggedUserId;
     }

@@ -107,7 +107,7 @@ public class ItemDaoImpl implements ItemDao {
     public Item getItemWithBids(Integer itemId) {
         Item item;
         try {
-            item = (Item) entityManager.createQuery("SELECT i FROM Item i JOIN FETCH i.bids WHERE i.itemId=:itemId ")
+            item = (Item) entityManager.createQuery("SELECT i FROM Item i JOIN FETCH i.bids WHERE i.itemId=:itemId")
                     .setParameter("itemId", itemId).getSingleResult();
         } catch (NoResultException ex) {
             //offer = entityManager.find(Offer.class, offerId);

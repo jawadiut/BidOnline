@@ -70,8 +70,6 @@ public class IndexController {
 
         User loggedUser = userDao.authenticateUser(user);
 
-//        System.out.println("loggedUsers name is: "+ loggedUser.getUserName());
-
         if(loggedUser != null){
 
             FacesContext context = FacesContext.getCurrentInstance();

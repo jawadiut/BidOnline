@@ -1,4 +1,6 @@
+import com.bo.ejb.ItemDao;
 import com.bo.ejb.UserDao;
+import com.bo.entity.Item;
 import com.bo.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,10 +28,13 @@ public class HomeController {
     private Integer loggedUserId;
     private String loggedUserName;
     private String itemCategory;
+    private List<Item> itemList;
     protected final Log log = LogFactory.getLog(getClass());
 
     @EJB
     private UserDao userDao;
+    @EJB
+    private ItemDao itemDao;
 
     public User getUser() {
         return user;
@@ -54,8 +60,20 @@ public class HomeController {
         return loggedUserName;
     }
 
+    public void setLoggedUserId(Integer loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
+
+    public void setLoggedUserName(String loggedUserName) {
+        this.loggedUserName = loggedUserName;
+    }
+
     public Integer getLoggedUserId() {
         return loggedUserId;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
     }
 
     @PostConstruct
@@ -73,13 +91,14 @@ public class HomeController {
 
         user = userDao.findUserById(loggedUserId);
         userRole = user.getRole();
+        itemList = itemDao.getItems();
         System.out.println("user info:\n"+user.getUserName()+"\n"+user.getEmail());
         System.out.println("user name: "+loggedUserName);
 
     }
 
     public String logout(){
-        System.out.println("In logout :D");
+
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
         httpSession.invalidate();
@@ -88,13 +107,38 @@ public class HomeController {
     }
 
     public String showItemList(String itemType){
-        System.out.println("itemType...."+itemType);
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         httpSession.setAttribute("loggedItemCategory",itemType);
         return "offersByCategory.xhtml?faces-redirect=true";
+    }
+
+    public String showUserProfile(Integer userId){
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession httpSession =(HttpSession) context.getExternalContext().getSession(false);
+        httpSession.setAttribute("userProfileId",userId);
+        return "userProfile.xhtml?faces-redirect=true";
+    }
+
+    public String offeredItemDetails(int itemId) {
+        //item = itemDao.getItem(itemId);
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+
+        if (loggedUserId != null) {
+
+            httpSession.setAttribute("loggedItemId", itemId);
+
+            //httpSession.setAttribute("loggedOfferId",offerId);
+            //loggedUserName = (String)httpSession.getAttribute("loggedUserName");
+
+            return "bidRequest.xhtml?faces-redirect=true";
+        }
+        return "mustLogin.xhtml?faces-redirect=true";
     }
 
 }

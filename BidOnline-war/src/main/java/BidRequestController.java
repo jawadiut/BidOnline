@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +27,8 @@ public class BidRequestController {
     private Item item;
     private Bid bid;
     private Integer loggedUserId;
+    private Integer newBid;
+    private List<User> bidders;
     @EJB
     private UserDao userDao;
     @EJB
@@ -35,13 +38,22 @@ public class BidRequestController {
 
     @PostConstruct
     public void init(){
-
+        newBid = 1;
         bid = new Bid();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);
-        item = itemDao.getItem((Integer)httpSession.getAttribute("loggedItemId"));
+        Integer loggedItemId = (Integer) httpSession.getAttribute("loggedItemId");
+        item = itemDao.getItemWithBidders(loggedItemId);
         loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
         user = userDao.findUserById(loggedUserId);
+        bidders = item.getBidders();
+        for(User u: bidders){
+            if(u.getUserId() == loggedUserId){
+                newBid = 0;
+                bid = bidDao.getBidByItemAndUserId(loggedUserId,loggedItemId);
+                break;
+            }
+        }
     }
 
     public String bidForThisItem(){
@@ -50,8 +62,18 @@ public class BidRequestController {
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);
         bid.setBidDate(Calendar.getInstance().getTime());
         itemDao.updateBidInfo(user.getUserId(),bid,item);
-        item = itemDao.getItemWithBidders((Integer)httpSession.getAttribute("loggedItemId"));
+        //item = itemDao.getItemWithBidders((Integer)httpSession.getAttribute("loggedItemId"));
         item.setItemBidHistory(item.getBidders().size());
+        item.setItemLatestBid(bid.getBidPrice());
+        itemDao.updateItem(item);
+        return "myBidList.xhtml?faces-redirect=true";
+
+    }
+
+    public String bidAgainForThisItem(){
+        item.setItemLatestBid(bid.getBidPrice());
+        bid.setBidDate(Calendar.getInstance().getTime());
+        bidDao.updateBid(bid);
         itemDao.updateItem(item);
         return "myBidList.xhtml?faces-redirect=true";
     }
@@ -68,11 +90,19 @@ public class BidRequestController {
         return item;
     }
 
+    public Integer getNewBid() {
+        return newBid;
+    }
+
     public void setItem(Item item) {
         this.item = item;
     }
 
-//    public Offer getOffer() {
+    public List<User> getBidders() {
+        return bidders;
+    }
+
+    //    public Offer getOffer() {
 //        return offer;
 //    }
 //

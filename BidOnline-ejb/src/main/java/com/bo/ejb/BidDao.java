@@ -14,7 +14,8 @@ import java.util.List;
  */
 @Local
 public interface BidDao {
-     public void saveBid();
+     public void updateBid(Bid bid);
      public List<Bid> getBidByOfferId(Integer offerId);
+     public Bid getBidByItemAndUserId(Integer userId,Integer itemId);
     //public Bid getBidByOffer(Integer offerId, Integer userId);
 }

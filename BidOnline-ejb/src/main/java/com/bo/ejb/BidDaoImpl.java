@@ -19,14 +19,22 @@ public class BidDaoImpl implements BidDao {
     @PersistenceContext(unitName = "persistBD")
     private EntityManager entityManager;
     @Override
-    public void saveBid() {
-
+    public void updateBid(Bid bid) {
+      entityManager.merge(bid);
     }
 
     @Override
     public List<Bid> getBidByOfferId(Integer offerId) {
-        return  entityManager.createQuery("select b from Bid b where b.offerId=:offerId")
+        return  entityManager.createQuery("select b from Bid b where b.itemId=:offerId")
                 .setParameter("offerId",offerId)
                 .getResultList();
+    }
+
+    @Override
+    public Bid getBidByItemAndUserId(Integer userId, Integer itemId) {
+        return (Bid)entityManager.createQuery("select  b from Bid  b where b.itemId=:itemId and b.userId=:userId")
+                .setParameter("itemId",itemId)
+                .setParameter("userId",userId)
+                .getSingleResult();
     }
 }
