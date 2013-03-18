@@ -24,6 +24,9 @@ import java.util.List;
 public class MyPendingListController {
     private User user;
     private Item item;
+    private Integer loggedUserId;
+    private String loggedUserName;
+    private String itemCategory;
     private List<Item> itemList;
     private List<Item> pendingItemList;
     @EJB
@@ -35,7 +38,8 @@ public class MyPendingListController {
         pendingItemList = new ArrayList<Item>();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);
-        Integer loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
+        loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
+        loggedUserName = (String)httpSession.getAttribute("loggedUserName");
         user = userDao.getUserWithOfferList(loggedUserId);
         itemList = user.getItems();
         for(Item i: itemList){
@@ -51,6 +55,14 @@ public class MyPendingListController {
         return item;
     }
 
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
     public List<Item> getItemList() {
         return itemList;
     }
@@ -62,5 +74,24 @@ public class MyPendingListController {
     public String cancelOffer(Integer itemId){
         itemDao.deleteItem(itemId);
         return "myPendingList.xhtml?faces-redirect=true";
+    }
+
+    public String showItemList(String itemType){
+        System.out.println("itemType...."+itemType);
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("loggedItemCategory",itemType);
+        return "offersByCategory.xhtml?faces-redirect=true";
+    }
+
+    public String logout(){
+        System.out.println("In logout :D");
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        httpSession.invalidate();
+        return "index.xhtml?faces-redirect=true";
+//        System.out.println(user.getUserName()+);
     }
 }

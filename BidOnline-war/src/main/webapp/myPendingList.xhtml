@@ -20,27 +20,76 @@
 </h:head>
 
 <h:body>
-    <h:form>
-        <p:dataList value="#{myPendingListController.pendingItemList}" var="offers" columns="3" rows="12"
-                    paginator="true"
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowsPerPageTemplate="9,12,15">
-            <h:panelGrid columns="2">
-                <p:outputLabel value="Title:"/>
-                <p:outputLabel value=" #{offers.itemTitle}"/>
-                <p:outputLabel value="Subtitle:"/>
-                <p:outputLabel value="#{offers.itemSubtitle}"/>
-                <p:outputLabel value="Starting price:"/>
-                <p:outputLabel value="\$ #{offers.itemStartingPrice}"/>
-                <p:outputLabel value="Fixed price:"/>
-                <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" size="130" resizable="false">
+            <div style="float: right">
+                Welcome <p:outputLabel value=" #{myPendingListController.loggedUserName}"/>
+            </div>
+            <div style="padding-top: 20px">
+                <div style="float: left">
+                    <h2 style="color: #d2691e">BidOnline</h2>
+                </div>
+                <div style="padding-left: 500px;float: right;padding-top: 20px;">
+                    <h:form id="north1">
+                        <h:panelGrid columns="5">
+                            <p:outputLabel value="Select category" style="color: red"/>
+                            <p:selectOneMenu value="#{myPendingListController.itemCategory}">
+                                <f:selectItem itemValue="car" itemLabel="car"/>
+                                <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
+                                <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
+                                <f:selectItem itemValue="house" itemLabel="House"/>
+                                <f:selectItem itemValue="land" itemLabel="Land"/>
+                                <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
+                                <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
+                                <f:selectItem itemValue="shari" itemLabel="Shari"/>
+                                <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
+                                <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
+                                <f:selectItem itemValue="silver" itemLabel="Silver"/>
+                                <f:selectItem itemValue="gold" itemLabel="Gold"/>
+                                <f:selectItem itemValue="others" itemLabel="Others"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Search"
+                                             action="#{myPendingListController.showItemList(myPendingListController.itemCategory)}"/>
+                            <p:spacer width="30px"/>
+                            <p:commandButton value="logout" action="#{myPendingListController.logout}"/>
 
-                <p:commandButton value="Cancel Offer" action="#{myPendingListController.cancelOffer(offers.itemId)}"/>
-                <!--<p:commandButton value="Buy this item"-->
-                <!--action=""/>-->
-            </h:panelGrid>
-        </p:dataList>
-    </h:form>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+
+            </div>
+        </p:layoutUnit>
+        <p:layoutUnit position="center">
+            <h:form>
+                <div style="width: 400px">
+                    <p:dataList value="#{myPendingListController.pendingItemList}" var="offers" rows="5"
+                                paginator="true"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="5,10,15"
+                                type="none">
+                        <div style="background-color: #ffe4c4">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="Title:"/>
+                                <p:outputLabel value=" #{offers.itemTitle}"/>
+                                <p:outputLabel value="Subtitle:"/>
+                                <p:outputLabel value="#{offers.itemSubtitle}"/>
+                                <p:outputLabel value="Starting price:"/>
+                                <p:outputLabel value="\$ #{offers.itemStartingPrice}"/>
+                                <p:outputLabel value="Fixed price:"/>
+                                <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+
+                                <p:commandButton value="Cancel Offer"
+                                                 action="#{myPendingListController.cancelOffer(offers.itemId)}"/>
+                                <!--<p:commandButton value="Buy this item"-->
+                                <!--action=""/>-->
+                            </h:panelGrid>
+                        </div>
+                        <p:spacer width="10px"/>
+                    </p:dataList>
+                </div>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
 </h:body>
 
 </html>

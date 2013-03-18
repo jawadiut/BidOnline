@@ -33,14 +33,14 @@ public class ItemDetailsController {
 
     private User user;
     private Item item;
-    private Offer offer;
+    //private Offer offer;
     protected final Log log = LogFactory.getLog(getClass());
     @EJB
     private ItemDao itemDao;
     @EJB
     private UserDao userDao;
-    @EJB
-    private OfferDao offerDao;
+//    @EJB
+//    private OfferDao offerDao;
     private List<Item> Items;
     private UploadedFile uploadedFile;
     public User getUser() {
@@ -71,7 +71,7 @@ public class ItemDetailsController {
     public void init(){
         if(item == null){
 
-            offer = new Offer();
+//            offer = new Offer();
 
             item = new Item();
 
@@ -92,8 +92,9 @@ public class ItemDetailsController {
 
     public String upload(){
         System.out.println("upload item available!!!!!" + item);
-//        byte[] file = uploadedFile.getContents();
-//        item.setImage(file);
+//        System.out.println("uploadedFILE>>>>>"+uploadedFile);
+////        byte[] file = uploadedFile.getContents();
+//        item.setItemImage(uploadedFile.getContents());
         item.setItemUploadDate(Calendar.getInstance().getTime());
         item.setItemBidHistory(0);
         item.setItemStatus("pending");

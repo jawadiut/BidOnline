@@ -22,7 +22,9 @@ import java.util.List;
 @Named
 @RequestScoped
 public class PendingOffersController {
-
+    private String itemCategory;
+    private Integer loggedUserId;
+    private String loggedUserName;
     private User user;
     private Item item;
     private List<Item> itemList;
@@ -39,6 +41,11 @@ public class PendingOffersController {
     public void init() {
         item = new Item();
         itemList = itemDao.getPendingItems();
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+        loggedUserName = (String)httpSession.getAttribute("loggedUserName");
+        loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
     }
 
     public User getUser() {
@@ -57,8 +64,19 @@ public class PendingOffersController {
         this.itemList = itemList;
     }
 
+    public String getItemCategory() {
+        return itemCategory;
+    }
 
-//    public List<NewItem> getNewItemList() {
+    public Integer getLoggedUserId() {
+        return loggedUserId;
+    }
+
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    //    public List<NewItem> getNewItemList() {
 //        return newItemList;
 //    }
 //
@@ -83,11 +101,12 @@ public class PendingOffersController {
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
 
-        if (httpSession.getAttribute("loggedUserId") != null) {
+        if (loggedUserId != null) {
 
             httpSession.setAttribute("loggedItemId", itemId);
 
             //httpSession.setAttribute("loggedOfferId",offerId);
+            //loggedUserName = (String)httpSession.getAttribute("loggedUserName");
 
             return "bidRequest.xhtml?faces-redirect=true";
         }
@@ -111,11 +130,27 @@ public class PendingOffersController {
     public String seeUserProfile(int userId){
         FacesContext context = FacesContext.getCurrentInstance();
 
-        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         httpSession.setAttribute("userProfileId",userId);
         return "userProfile.xhtml?faces-redirect=true";
     }
 
+    public String logout(){
+        System.out.println("In logout :D");
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        httpSession.invalidate();
+        return "index.xhtml?faces-redirect=true";
+    }
 
+    public String showItemList(String itemType){
+        System.out.println("itemType...."+itemType);
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("loggedItemCategory",itemType);
+        return "offersByCategory.xhtml?faces-redirect=true";
+    }
 }

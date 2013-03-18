@@ -79,6 +79,7 @@ public class IndexController {
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
             httpSession.setAttribute("loggedUserId",loggedUser.getUserId());
+            httpSession.setAttribute("loggedUserName",loggedUser.getUserName());
 
             return "home.xhtml?faces-redirect=true";
         }

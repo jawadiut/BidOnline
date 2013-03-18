@@ -60,31 +60,37 @@
             </div>
         </p:layoutUnit>
         <p:layoutUnit position="center">
-            <p:dataGrid value="#{myOffersController.activeItems}" var="offers" columns="3" rows="12"
-                        paginator="true"
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        rowsPerPageTemplate="9,12,15">
-                <!--<ui:param name="myVar" value="0"/>-->
-                <!--<p:graphicImage value="" height="200" width="200"/>-->
-
-                <h:panelGrid columns="2">
-                    <p:outputLabel value="Serial No:"/>
-                    <p:outputLabel value=" #{offers.itemId}"/>
-                    <p:outputLabel value="Item title:"/>
-                    <p:outputLabel value="#{offers.itemTitle}"/>
-                    <p:outputLabel value="Fixed price:"/>
-                    <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
-                    <p:outputLabel value="Number of bids:"/>
-                    <p:outputLabel value="#{offers.itemBidHistory}"/>
-                    <h:form>
-                        <h:panelGroup rendered="#{offers.itemBidHistory>0}">
-                            <p:commandLink value="Show Bid details"
-                                           action="#{myOffersController.showBidList(offers.itemId)}"/>
-                        </h:panelGroup>
-                    </h:form>
-                </h:panelGrid>
-
-            </p:dataGrid>
+            <div align="center">
+                <h2 style="color: #006400">My Offers</h2>
+            </div>
+            <div style="width: 400px">
+                <p:dataList value="#{myOffersController.activeItems}" var="offers" rows="12"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="9,12,15" type="none">
+                    <!--<ui:param name="myVar" value="0"/>-->
+                    <!--<p:graphicImage value="" height="200" width="200"/>-->
+                    <div style="background-color: #ffe4c4">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Serial No:"/>
+                            <p:outputLabel value=" #{offers.itemId}"/>
+                            <p:outputLabel value="Item title:"/>
+                            <p:outputLabel value="#{offers.itemTitle}"/>
+                            <p:outputLabel value="Fixed price:"/>
+                            <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
+                            <p:outputLabel value="Number of bids:"/>
+                            <p:outputLabel value="#{offers.itemBidHistory}"/>
+                            <h:form>
+                                <h:panelGroup rendered="#{offers.itemBidHistory>0}">
+                                    <p:commandLink value="Show Bid details"
+                                                   action="#{myOffersController.showBidList(offers.itemId)}"/>
+                                </h:panelGroup>
+                            </h:form>
+                        </h:panelGrid>
+                    </div>
+                    <p:spacer width="10px"/>
+                </p:dataList>
+            </div>
         </p:layoutUnit>
     </p:layout>
 </h:body>

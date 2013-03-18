@@ -33,8 +33,9 @@
         </p:layoutUnit>
         <p:layoutUnit position="center">
             <h2>Enter item details:</h2>
+            <!---->
             <!--enctype="multipart/form-data"-->
-            <h:form id= "Form2" >
+            <h:form id= "Form2">
                 <h:panelGrid columns="3">
                     <p:outputLabel for="title" value="Title"/>
                     <p:inputText id="title" required="true" requiredMessage="Title is required" size="26"
@@ -88,11 +89,10 @@
                                 value="#{itemDetailsController.item.itemExpireDate}"/>
                     <p:message for="expireDate"/>
                     <p:outputLabel for="image" value="Image"/>
-                    <p:fileUpload id="image" required="false" value="#{itemDetailsController.uploadedFile}"
+                    <p:fileUpload id="image" required="false"  value="#{itemDetailsController.uploadedFile}"
                                   mode="simple" update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                     <p:message for="image"/>
-                    <!--<p:growl id="messages"/>-->
-                    <!--<p:calendar id="calender" value="Calender"/>-->
+
                 </h:panelGrid>
                 <p:commandButton value="Post" action="#{itemDetailsController.upload}" ajax="false"/>
             </h:form>

@@ -25,6 +25,7 @@ public class OffersByCategoryController {
     private String itemCategory;
     private List<Item> itemList;
     private Integer loggedUserId;
+    private String loggedUserName;
     @EJB
     private ItemDao itemDao;
 
@@ -33,6 +34,7 @@ public class OffersByCategoryController {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
+        loggedUserName = (String)httpSession.getAttribute("loggedUserName");
         itemCategory = (String)httpSession.getAttribute("loggedItemCategory");
         item = new Item();
         itemList = itemDao.getItemByCategory(itemCategory);
@@ -60,6 +62,10 @@ public class OffersByCategoryController {
 
     public String getItemCategory() {
         return itemCategory;
+    }
+
+    public String getLoggedUserName() {
+        return loggedUserName;
     }
 
     public String logout(){

@@ -22,8 +22,11 @@
 
 <h:body>
     <p:layout fullPage="true">
-        <p:layoutUnit position="north" size="100">
-            <div>
+        <p:layoutUnit position="north" size="130">
+            <div style="float: right">
+                Welcome <p:outputLabel value=" #{offersByCategoryController.loggedUserName}"/>
+            </div>
+            <div style="padding-top: 20px">
                 <div style="float: left">
                     <h2 style="color: #d2691e">BidOnline</h2>
                 </div>
@@ -63,7 +66,10 @@
             <h:form rendered="#{offersByCategoryController.loggedUserId != null}">
                 <p:menubar style="color: #add8e6">
                     <p:submenu label="My Profile">
-                        <p:menuitem value="Offers" outcome="myOffers.xhtml"/>
+                        <p:submenu label="Offers">
+                            <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
+                            <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
+                        </p:submenu>
                         <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
                         <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
                         <p:menuitem value="Edit profile"/>

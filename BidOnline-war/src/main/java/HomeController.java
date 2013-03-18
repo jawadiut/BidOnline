@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
     private User user;
     private Integer userRole;
+    private Integer loggedUserId;
+    private String loggedUserName;
     private String itemCategory;
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -48,6 +50,14 @@ public class HomeController {
         return itemCategory;
     }
 
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    public Integer getLoggedUserId() {
+        return loggedUserId;
+    }
+
     @PostConstruct
     public void init(){
 
@@ -57,11 +67,14 @@ public class HomeController {
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
 
-        Integer loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
+        loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
+
+        loggedUserName = (String) httpSession.getAttribute("loggedUserName");
 
         user = userDao.findUserById(loggedUserId);
         userRole = user.getRole();
         System.out.println("user info:\n"+user.getUserName()+"\n"+user.getEmail());
+        System.out.println("user name: "+loggedUserName);
 
     }
 
