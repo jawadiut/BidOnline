@@ -66,7 +66,7 @@ public class BidRequestController {
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);
         bid.setBidDate(Calendar.getInstance().getTime());
         itemDao.updateBidInfo(user.getUserId(),bid,item);
-        //item = itemDao.getItemWithBidders((Integer)httpSession.getAttribute("loggedItemId"));
+        item = itemDao.getItemWithBidders((Integer)httpSession.getAttribute("loggedItemId"));
         item.setItemBidHistory(item.getBidders().size());
         item.setItemLatestBid(bid.getBidPrice());
         itemDao.updateItem(item);

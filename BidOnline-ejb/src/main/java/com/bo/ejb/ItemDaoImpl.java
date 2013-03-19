@@ -127,7 +127,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<Item> getItemByUploadDate(){
-        return entityManager.createQuery("select i from Item i ORDER BY i.itemUploadDate DESC ")
+        return entityManager.createQuery("select i from Item i ORDER BY i.itemUploadDate ASC ")
                 .getResultList();
     }
 

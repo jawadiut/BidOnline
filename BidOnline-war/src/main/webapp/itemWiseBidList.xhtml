@@ -75,8 +75,8 @@
                     </p:submenu>
                     <p:submenu label="Available offers">
                         <!--<p:menuitem rendered="" value="Activate offers" outcome="pendingOffers.xhtml"/>-->
-                        <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
-                        <p:menuitem value="Top offers"/>
+                        <p:menuitem value="Recent offers" action="#{homeController.recent}"/>
+                        <p:menuitem value="Top offers" action="#{homeController.top}"/>
                     </p:submenu>
                     <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
 

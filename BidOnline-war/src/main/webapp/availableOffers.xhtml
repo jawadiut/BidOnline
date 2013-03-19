@@ -92,20 +92,21 @@
                 </h:form>
             </div>
             <p:spacer height="10px"/>
-            <div style="padding-left: 200px;float: left" align="center">
-            <h:form>
-                <div align="center">
-                    <h2 style="color: #006400">Active offers</h2>
-                </div>
-                <div style="">
 
-                    <p:dataGrid value="#{availableOffersController.itemList}" var="offers" columns="3" rows="12"
+            <div style="padding-left: 200px;padding-top: 20px;padding-right: 200px">
+                <h:form>
+
+
+                    <p:dataList value="#{availableOffersController.itemList}" var="offers" rows="5"
                                 paginator="true"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                rowsPerPageTemplate="9,12,15">
+                                rowsPerPageTemplate="5,10,15" type="none">
                         <!--<ui:param name="myVar" value="0"/>-->
                         <!--<p:graphicImage value="" height="200" width="200"/>-->
-                        <div style="background-color: #ffe4c4;width: 300px;height: 150px">
+                        <f:facet name="header">
+                            Active Offers
+                        </f:facet>
+                        <div style="background-color: #ffe4c4">
                             <h:panelGrid columns="2">
                                 <p:outputLabel value="Serial No:"/>
                                 <p:outputLabel value=" #{offers.itemId}"/>
@@ -115,13 +116,15 @@
                                 <p:outputLabel value="\$ #{offers.itemFixedPrice}"/>
                                 <p:commandLink value="Posted By"
                                                action="#{availableOffersController.seeUserProfile(offers.userId)}"/>
-                                <p:commandButton rendered="#{availableOffersController.loggedUserId != offers.userId}" value="Buy this item"
+                                <p:commandButton rendered="#{availableOffersController.loggedUserId != offers.userId}"
+                                                 value="Buy this item"
                                                  action="#{availableOffersController.offeredItemDetails(offers.itemId)}"/>
                             </h:panelGrid>
                         </div>
-                    </p:dataGrid>
-                </div>
-            </h:form>
+                        <p:spacer height="10px"/>
+                    </p:dataList>
+
+                </h:form>
             </div>
         </p:layoutUnit>
     </p:layout>

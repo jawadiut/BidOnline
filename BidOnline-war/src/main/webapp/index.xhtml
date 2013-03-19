@@ -105,12 +105,12 @@
 
                 </div>
 
-                <div style="float: left;padding-left: 70px">
+                <div style="float: left;padding-left: 70px;width: 600px">
                     <h:form>
-                        <p:dataGrid value="#{indexController.itemList}" var="offers" columns="3" rows="12"
+                        <p:dataList value="#{indexController.itemList}" var="offers" rows="5"
                                     paginator="true"
                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                    rowsPerPageTemplate="9,12,15">
+                                    rowsPerPageTemplate="5,10,15" type="none">
                             <f:facet name="header">
                                 Active offers
                             </f:facet>
@@ -131,7 +131,8 @@
 
                                 </h:panelGrid>
                             </div>
-                        </p:dataGrid>
+                            <p:spacer height="10px"/>
+                        </p:dataList>
                     </h:form>
                 </div>
             </div>
