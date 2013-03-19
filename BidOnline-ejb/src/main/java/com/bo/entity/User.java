@@ -61,7 +61,9 @@ public class User implements Serializable {
             inverseJoinColumns={@JoinColumn(name = "itemId",referencedColumnName = "itemId")})
     private List<Item> bidItems;
 
-
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "buyerId")
+    private List<Item> boughtItems;
 //    private ArrayList <BuyList> buyLists;
 //    private ArrayList <Customer> customers;
 //    private ArrayList <Seller> sellLists;

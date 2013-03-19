@@ -50,15 +50,14 @@ public class Item implements Serializable {
 
     @Lob
     private byte[] itemImage;
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "itemId")
-//    private Offer offer;
-
-    private Integer userId;
 
     private String itemStatus;
 
     private Integer itemLatestBid;
+
+    private Integer userId;
+
+    private Integer buyerId;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "itemId")
@@ -201,6 +200,14 @@ public class Item implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Integer buyerId) {
+        this.buyerId = buyerId;
     }
 
     //    public Integer getItemOwnerId() {

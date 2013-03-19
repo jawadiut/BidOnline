@@ -18,25 +18,88 @@
 
 <h:head>
     <title>Product Details</title>
-    <h:outputStylesheet library="css" name="itemDetails.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
-<h:body>
+<h:body styleClass="indexContainer">
     <p:layout fullPage="true">
-        <p:layoutUnit position="north" size="120" resizable="false">
-            <h2 align="center">BidOnline</h2>
-            <div align="right">
-                <!--<h:form id="Form1">-->
-                    <!--<p:commandLink value="logout" action=""/>-->
-                <!--</h:form>-->
+        <p:layoutUnit position="north" size="130" resizable="false">
+            <div style="float: right">
+                Welcome <p:outputLabel value=" #{itemDetailsController.loggedUserName}"/>!
+            </div>
+            <!--<div style="">-->
+            <!--<div style="float: left">-->
+            <!--<h2 style="color: #d2691e">BidOnline</h2>-->
+            <!--</div>-->
+            <div style="padding-top: 20px">
+                <h:form id="north1">
+                    <h:panelGrid columns="2">
+
+                        <h2 style="color: #d2691e;float: left">BidOnline</h2>
+                        <!--<div >-->
+                        <h:panelGrid columns="6" style="float: right;padding-left: 395px">
+                            <p:outputLabel value="Select" style="color: red"/>
+                            <p:outputLabel value="Category" style="color: red"/>
+                            <p:selectOneMenu value="#{itemDetailsController.itemCategory}">
+                                <f:selectItem itemValue="car" itemLabel="car"/>
+                                <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
+                                <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
+                                <f:selectItem itemValue="house" itemLabel="House"/>
+                                <f:selectItem itemValue="land" itemLabel="Land"/>
+                                <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
+                                <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
+                                <f:selectItem itemValue="shari" itemLabel="Shari"/>
+                                <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
+                                <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
+                                <f:selectItem itemValue="silver" itemLabel="Silver"/>
+                                <f:selectItem itemValue="gold" itemLabel="Gold"/>
+                                <f:selectItem itemValue="others" itemLabel="Others"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Search"
+                                             action="#{itemDetailsController.showItemList(itemDetailsController.itemCategory)}"/>
+                            <p:spacer width="30px"/>
+                            <p:commandButton value="logout" action="#{itemDetailsController.logout}"/>
+                        </h:panelGrid>
+                        <!--</div>-->
+                    </h:panelGrid>
+                </h:form>
             </div>
         </p:layoutUnit>
         <p:layoutUnit position="center">
-            <h2>Enter item details:</h2>
+            <div>
+                <h:form>
+                    <p:menubar style="color: #add8e6">
+                        <p:submenu label="My Profile">
+                            <p:submenu label="Offers">
+                                <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
+                                <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
+                            </p:submenu>
+
+                            <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
+                            <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
+                            <p:menuitem value="Edit profile"/>
+                        </p:submenu>
+                        <p:submenu label="Available offers">
+                            <p:menuitem rendered="#{homeController.userRole == 0}" value="Activate offers"
+                                        outcome="pendingOffers.xhtml"/>
+                            <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
+                            <p:menuitem value="Top offers"/>
+                        </p:submenu>
+                        <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
+
+                        <p:menuitem value="Home" outcome="home.xhtml"/>
+                    </p:menubar>
+                </h:form>
+            </div>
             <!---->
             <!--enctype="multipart/form-data"-->
-            <h:form id= "Form2">
-                <h:panelGrid columns="3">
+            <div style="float: left;padding-top: 20px">
+
+
+                <h:form id= "Form2">
+                    <h3>Enter Offer Details</h3>
+                  <h:panelGrid columns="3">
+
                     <p:outputLabel for="title" value="Title"/>
                     <p:inputText id="title" required="true" requiredMessage="Title is required" size="26"
                                  value="#{itemDetailsController.item.itemTitle}"/>
@@ -96,7 +159,7 @@
                 </h:panelGrid>
                 <p:commandButton value="Post" action="#{itemDetailsController.upload}" ajax="false"/>
             </h:form>
-
+            </div>
         </p:layoutUnit>
     </p:layout>
 

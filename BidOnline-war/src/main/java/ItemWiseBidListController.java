@@ -1,10 +1,8 @@
 import com.bo.ejb.BidDao;
 import com.bo.ejb.ItemDao;
-import com.bo.ejb.OfferDao;
 import com.bo.ejb.UserDao;
 import com.bo.entity.Bid;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
 import com.bo.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -40,8 +38,6 @@ public class ItemWiseBidListController {
     private ItemDao itemDao;
     @EJB
     private BidDao bidDao;
-//    @EJB
-//    private OfferDao offerDao;
     @EJB
     private UserDao userDao;
 

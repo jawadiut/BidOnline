@@ -8,7 +8,6 @@
 
         <class>com.bo.entity.User</class>
         <class>com.bo.entity.Item</class>
-        <class>com.bo.entity.Offer</class>
         <class>com.bo.entity.Bid</class>
         <properties>
             <property name="hibernate.show_sql" value="true"/>

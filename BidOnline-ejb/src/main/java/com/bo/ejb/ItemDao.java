@@ -2,7 +2,7 @@ package com.bo.ejb;
 
 import com.bo.entity.Bid;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
+
 
 import javax.ejb.Local;
 import java.util.List;
@@ -22,6 +22,8 @@ public interface ItemDao {
     public Item getItem(int itemId);
     public void updateItem(Item item);
     public List<Item> getItems();
+    public List<Item> getItemByUploadDate();
+    public List<Item> getItemByHighestBids();
     public List<Item> getPendingItems();
     public void updateBidInfo(Integer userId, Bid bid,Item item);
     public Item getItemWithBidders(Integer itemId);

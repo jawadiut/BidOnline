@@ -141,4 +141,22 @@ public class HomeController {
         return "mustLogin.xhtml?faces-redirect=true";
     }
 
+    public String recent(){
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("recent","recent");
+        return "availableOffers.xhtml?faces-redirect=true";
+    }
+
+    public String top(){
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("top","top");
+        return "availableOffers.xhtml?faces-redirect=true";
+    }
+
 }

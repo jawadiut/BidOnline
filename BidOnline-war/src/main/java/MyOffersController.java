@@ -1,8 +1,6 @@
 import com.bo.ejb.ItemDao;
-import com.bo.ejb.OfferDao;
 import com.bo.ejb.UserDao;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
 import com.bo.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -27,7 +25,8 @@ public class MyOffersController {
     private User user;
     private Item item;
     private String itemCategory;
-    private String loggedUserId;
+    private Integer loggedUserId;
+    private String loggedUserName;
     private List<Item> items;
     private List<Item> activeItems;
     //    private List<Offer> offers;
@@ -36,8 +35,6 @@ public class MyOffersController {
     @EJB
     private UserDao userDao;
 
-    //    @EJB
-//    private OfferDao offerDao;
     @PostConstruct
     public void init() {
 
@@ -45,13 +42,14 @@ public class MyOffersController {
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+        loggedUserId =(Integer)httpSession.getAttribute("loggedUserId");
+        loggedUserName = (String)httpSession.getAttribute("loggedUserName");
 
-        user = userDao.getUserWithOfferList((Integer) httpSession.getAttribute("loggedUserId"));
+        user = userDao.getUserWithOfferList(loggedUserId);
         items = user.getItems();
         for(Item i: items){
             if(i.getItemStatus().equals("active"))activeItems.add(i);
         }
-        System.out.println("items..." + items);
     }
 
     public User getUser() {
@@ -86,7 +84,7 @@ public class MyOffersController {
         this.itemCategory = itemCategory;
     }
 
-    public String getLoggedUserId() {
+    public Integer getLoggedUserId() {
         return loggedUserId;
     }
 
@@ -94,13 +92,9 @@ public class MyOffersController {
         return activeItems;
     }
 
-    //    public List<Offer> getOffers() {
-//        return offers;
-//    }
-//
-//    public void setOffers(List<Offer> offers) {
-//        this.offers = offers;
-//    }
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
 
     public String showBidList(Integer itemId) {
         System.out.println("bidItemId: " + itemId);

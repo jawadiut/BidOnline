@@ -1,5 +1,4 @@
 import com.bo.ejb.ItemDao;
-import com.bo.ejb.OfferDao;
 import com.bo.ejb.UserDao;
 import com.bo.entity.Item;
 import com.bo.entity.User;
@@ -33,17 +32,14 @@ public class AvailableOffersController {
     private Integer loggedUserId;
     private String loggedUserName;
     private String itemCategory;
-    //private NewItem newItem;
-    //private Offer offer;
-    //private List<Offer> offers;
+
+
 
     private StreamedContent[] dbImage;
     private StreamedContent dbImg;
     private List<Item> itemList;
-    //private List<NewItem> newItemList;
     private InputStream dbStream;
-    @EJB
-    private OfferDao offerDao;
+
 
     @EJB
     private UserDao userDao;
@@ -54,10 +50,22 @@ public class AvailableOffersController {
     @PostConstruct
     public void init() {
         item = new Item();
-        itemList = itemDao.getItems();
+
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+
+        if(httpSession.getAttribute("recent")!=null){
+           itemList = itemDao.getItemByUploadDate();
+        }
+        else if(httpSession.getAttribute("top")!=null){
+            itemList = itemDao.getItemByHighestBids();
+        }
+        else {
+            itemList = itemDao.getItems();
+
+        }
         loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
 
         loggedUserName = (String) httpSession.getAttribute("loggedUserName");
@@ -119,21 +127,7 @@ public class AvailableOffersController {
         this.dbImg = dbImg;
     }
 
-//    public List<NewItem> getNewItemList() {
-//        return newItemList;
-//    }
-//
-//    public void setNewItemList(List<NewItem> newItemList) {
-//        this.newItemList = newItemList;
-//    }
 
-//    public NewItem getNewItem() {
-//        return newItem;
-//    }
-//
-//    public void setNewItem(NewItem newItem) {
-//        this.newItem = newItem;
-//    }
 
 
 
@@ -166,5 +160,23 @@ public class AvailableOffersController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
+    }
+
+    public String recent(){
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("recent","recent");
+        return "availableOffers.xhtml?faces-redirect=true";
+    }
+
+    public String top(){
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("top","top");
+        return "availableOffers.xhtml?faces-redirect=true";
     }
 }

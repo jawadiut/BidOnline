@@ -22,19 +22,49 @@
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
-<h:body>
+<h:body styleClass="indexContainer">
     <p:layout fullPage="true">
-        <p:layoutUnit position="north" size="100">
-            <h:form>
-                <div style="padding-left: 10px;padding-right: 10px">
-                    <div>
-                        <h2 style="color: #d2691e">BidOnline</h2>
-                    </div>
-                    <div class="logout">
-                        <p:commandButton value="logout" action="#{availableOffersController.logout}"/>
-                    </div>
-                </div>
-            </h:form>
+        <p:layoutUnit position="north" size="130">
+            <div style="float: right">
+                Welcome <p:outputLabel value=" #{homeController.loggedUserName}"/>!
+            </div>
+            <!--<div style="">-->
+            <!--<div style="float: left">-->
+            <!--<h2 style="color: #d2691e">BidOnline</h2>-->
+            <!--</div>-->
+            <div style="padding-top: 20px">
+                <h:form id="north1">
+                    <h:panelGrid columns="2">
+
+                        <h2 style="color: #d2691e;float: left">BidOnline</h2>
+                        <!--<div >-->
+                        <h:panelGrid columns="6" style="float: right;padding-left: 395px">
+                            <p:outputLabel value="Select" style="color: red"/>
+                            <p:outputLabel value="Category" style="color: red"/>
+                            <p:selectOneMenu value="#{homeController.itemCategory}">
+                                <f:selectItem itemValue="car" itemLabel="car"/>
+                                <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
+                                <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
+                                <f:selectItem itemValue="house" itemLabel="House"/>
+                                <f:selectItem itemValue="land" itemLabel="Land"/>
+                                <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
+                                <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
+                                <f:selectItem itemValue="shari" itemLabel="Shari"/>
+                                <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
+                                <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
+                                <f:selectItem itemValue="silver" itemLabel="Silver"/>
+                                <f:selectItem itemValue="gold" itemLabel="Gold"/>
+                                <f:selectItem itemValue="others" itemLabel="Others"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Search"
+                                             action="#{homeController.showItemList(homeController.itemCategory)}"/>
+                            <p:spacer width="30px"/>
+                            <p:commandButton value="logout" action="#{homeController.logout}"/>
+                        </h:panelGrid>
+                        <!--</div>-->
+                    </h:panelGrid>
+                </h:form>
+            </div>
         </p:layoutUnit>
         <p:layoutUnit position="center">
             <div>
@@ -53,8 +83,8 @@
                         <p:submenu label="Available offers">
                             <p:menuitem rendered="#{homeController.userRole == 0}" value="Activate offers"
                                         outcome="pendingOffers.xhtml"/>
-                            <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
-                            <p:menuitem value="Top offers"/>
+                            <p:menuitem value="Recent offers" action="#{availableOffersController.recent}"/>
+                            <p:menuitem value="Top offers" action="#{availableOffersController.top}"/>
                         </p:submenu>
                         <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
 
@@ -62,11 +92,12 @@
                 </h:form>
             </div>
             <p:spacer height="10px"/>
+            <div style="padding-left: 200px;float: left" align="center">
             <h:form>
                 <div align="center">
                     <h2 style="color: #006400">Active offers</h2>
                 </div>
-                <div style="width: 400px;height: 200px">
+                <div style="">
 
                     <p:dataGrid value="#{availableOffersController.itemList}" var="offers" columns="3" rows="12"
                                 paginator="true"
@@ -74,7 +105,7 @@
                                 rowsPerPageTemplate="9,12,15">
                         <!--<ui:param name="myVar" value="0"/>-->
                         <!--<p:graphicImage value="" height="200" width="200"/>-->
-                        <div style="background-color: #ffe4c4">
+                        <div style="background-color: #ffe4c4;width: 300px;height: 150px">
                             <h:panelGrid columns="2">
                                 <p:outputLabel value="Serial No:"/>
                                 <p:outputLabel value=" #{offers.itemId}"/>
@@ -91,6 +122,7 @@
                     </p:dataGrid>
                 </div>
             </h:form>
+            </div>
         </p:layoutUnit>
     </p:layout>
     <!--shishur jonno valobasha-->

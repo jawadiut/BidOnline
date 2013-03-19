@@ -1,19 +1,14 @@
 import com.bo.ejb.ItemDao;
-import com.bo.ejb.ItemDaoImpl;
-import com.bo.ejb.OfferDao;
 import com.bo.ejb.UserDao;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
 import com.bo.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -41,6 +36,9 @@ public class ItemDetailsController {
     private UserDao userDao;
 
     private List<Item> Items;
+    private Integer loggedUserId;
+    private String loggedUserName;
+    private String itemCategory;
     private UploadedFile uploadedFile;
     public User getUser() {
         return user;
@@ -66,6 +64,30 @@ public class ItemDetailsController {
         this.uploadedFile = uploadedFile;
     }
 
+    public Integer getLoggedUserId() {
+        return loggedUserId;
+    }
+
+    public void setLoggedUserId(Integer loggedUserId) {
+        this.loggedUserId = loggedUserId;
+    }
+
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    public void setLoggedUserName(String loggedUserName) {
+        this.loggedUserName = loggedUserName;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+    }
+
     @PostConstruct
     public void init(){
         if(item == null){
@@ -76,7 +98,10 @@ public class ItemDetailsController {
 
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
 
-            Integer loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
+            loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
+
+            loggedUserName = (String) httpSession.getAttribute("loggedUserName");
+
 
             user = userDao.findUserById(loggedUserId);
 
@@ -108,5 +133,17 @@ public class ItemDetailsController {
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
 
+    }
+
+
+
+    public String showItemList(String itemType){
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("loggedItemCategory",itemType);
+        return "offersByCategory.xhtml?faces-redirect=true";
     }
 }

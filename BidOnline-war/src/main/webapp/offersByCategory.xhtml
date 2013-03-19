@@ -20,20 +20,25 @@
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 
-<h:body>
+<h:body styleClass="indexContainer">
     <p:layout fullPage="true">
         <p:layoutUnit position="north" size="130">
             <div style="float: right">
-                Welcome <p:outputLabel value=" #{offersByCategoryController.loggedUserName}"/>
+                Welcome <p:outputLabel value=" #{offersByCategoryController.loggedUserName}"/>!
             </div>
+            <!--<div style="">-->
+            <!--<div style="float: left">-->
+            <!--<h2 style="color: #d2691e">BidOnline</h2>-->
+            <!--</div>-->
             <div style="padding-top: 20px">
-                <div style="float: left">
-                    <h2 style="color: #d2691e">BidOnline</h2>
-                </div>
-                <div style="padding-left: 500px;float: right;padding-top: 20px">
-                    <h:form id="north1">
-                        <h:panelGrid columns="5">
-                            <p:outputLabel value="Select category" style="color: red"/>
+                <h:form id="north1">
+                    <h:panelGrid columns="2">
+
+                        <h2 style="color: #d2691e;float: left">BidOnline</h2>
+                        <!--<div >-->
+                        <h:panelGrid columns="6" style="float: right;padding-left: 395px">
+                            <p:outputLabel value="Select" style="color: red"/>
+                            <p:outputLabel value="Category" style="color: red"/>
                             <p:selectOneMenu value="#{offersByCategoryController.itemCategory}">
                                 <f:selectItem itemValue="car" itemLabel="car"/>
                                 <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
@@ -52,14 +57,11 @@
                             <p:commandButton value="Search"
                                              action="#{offersByCategoryController.showItemList(offersByCategoryController.itemCategory)}"/>
                             <p:spacer width="30px"/>
-
-                            <p:commandButton rendered="#{offersByCategoryController.loggedUserId != null}"
-                                             value="logout" action="#{offersByCategoryController.logout}"/>
-
+                            <p:commandButton  rendered="#{offersByCategoryController.loggedUserId != null}" value="logout" action="#{offersByCategoryController.logout}"/>
                         </h:panelGrid>
-                    </h:form>
-                </div>
-
+                        <!--</div>-->
+                    </h:panelGrid>
+                </h:form>
             </div>
         </p:layoutUnit>
         <p:layoutUnit position="center">
@@ -84,11 +86,14 @@
                 </p:menubar>
             </h:form>
             <p:spacer height="10px"/>
-            <div style="width: 400px;height: 200px">
+            <div style="padding-left: 200px;padding-top: 20px;padding-right: 200px">
                 <p:dataList value="#{offersByCategoryController.itemList}" var="items" id="bidList"
                             paginator="true" rows="5" effectSpeed="fast"
                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="5,10,15" type="none" style="width: 100px">
+                    <f:facet name="header">
+                        #{offersByCategoryController.itemCategory}s
+                    </f:facet>
                     <div style="background-color: #ffe4c4">
                         <h:panelGrid columns="2">
                             <p:outputLabel value="Item id" style="color: red"/>

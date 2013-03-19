@@ -2,7 +2,7 @@ package com.bo.ejb;
 
 import com.bo.entity.Bid;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
+
 import com.bo.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -122,6 +122,18 @@ public class ItemDaoImpl implements ItemDao {
         return entityManager.createQuery("select i from Item  i where i.itemType LIKE :category and i.itemStatus LIKE :status")
                 .setParameter("category",category)
                 .setParameter("status","active")
+                .getResultList();
+    }
+
+    @Override
+    public List<Item> getItemByUploadDate(){
+        return entityManager.createQuery("select i from Item i ORDER BY i.itemUploadDate DESC ")
+                .getResultList();
+    }
+
+    @Override
+    public List<Item> getItemByHighestBids(){
+        return entityManager.createQuery("select i from Item i ORDER BY i.itemBidHistory DESC ")
                 .getResultList();
     }
 }

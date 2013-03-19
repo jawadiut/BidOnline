@@ -1,7 +1,7 @@
 import com.bo.ejb.*;
 import com.bo.entity.Bid;
 import com.bo.entity.Item;
-import com.bo.entity.Offer;
+
 import com.bo.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +27,9 @@ public class BidRequestController {
     private Item item;
     private Bid bid;
     private Integer loggedUserId;
+
+    private String loggedUserName;
+    private String itemCategory;
     private Integer newBid;
     private List<User> bidders;
     @EJB
@@ -45,6 +48,7 @@ public class BidRequestController {
         Integer loggedItemId = (Integer) httpSession.getAttribute("loggedItemId");
         item = itemDao.getItemWithBidders(loggedItemId);
         loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
+        loggedUserName = (String)httpSession.getAttribute("loggedUserName");
         user = userDao.findUserById(loggedUserId);
         bidders = item.getBidders();
         for(User u: bidders){
@@ -78,6 +82,24 @@ public class BidRequestController {
         return "myBidList.xhtml?faces-redirect=true";
     }
 
+    public String showItemList(String itemType){
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+
+        httpSession.setAttribute("loggedItemCategory",itemType);
+        return "offersByCategory.xhtml?faces-redirect=true";
+    }
+
+    public String logout(){
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        httpSession.invalidate();
+        return "index.xhtml?faces-redirect=true";
+//        System.out.println(user.getUserName()+);
+    }
     public User getUser() {
         return user;
     }
@@ -100,6 +122,22 @@ public class BidRequestController {
 
     public List<User> getBidders() {
         return bidders;
+    }
+
+    public String getLoggedUserName() {
+        return loggedUserName;
+    }
+
+    public void setLoggedUserName(String loggedUserName) {
+        this.loggedUserName = loggedUserName;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
     //    public Offer getOffer() {
