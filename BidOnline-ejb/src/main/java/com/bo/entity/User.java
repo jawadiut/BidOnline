@@ -45,13 +45,6 @@ public class User implements Serializable {
     @JoinColumn(name = "userId")
     private List<Item> items;
 
-    //    @JoinTable(name="Offer", joinColumns={@JoinColumn(name="userId",referencedColumnName = "userId")},
-//            inverseJoinColumns={@JoinColumn(name="itemId",referencedColumnName = "itemId")})
-
-//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-//    @JoinTable(name="User_Offer", joinColumns={@JoinColumn(name = "userId",referencedColumnName = "userId")},
-//    inverseJoinColumns={@JoinColumn(name = "itemId",referencedColumnName = "itemId")})
-//    private List<Item> watchList;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
@@ -65,9 +58,6 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "buyerId")
     private List<Item> boughtItems;
-//    private ArrayList <BuyList> buyLists;
-//    private ArrayList <Customer> customers;
-//    private ArrayList <Seller> sellLists;
 
 
     public List<Item> getItems() {

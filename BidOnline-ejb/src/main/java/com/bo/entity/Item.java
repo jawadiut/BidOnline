@@ -209,35 +209,5 @@ public class Item implements Serializable {
         this.buyerId = buyerId;
     }
 
-    //    public Integer getItemOwnerId() {
-//        return itemOwnerId;
-//    }
-//
-//    public void setItemOwnerId(Integer itemOwnerId) {
-//        this.itemOwnerId = itemOwnerId;
-//    }
 
-//    public Integer getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Integer userId) {
-//        this.userId = userId;
-//    }
-
-//    public Offer getOffer() {
-//        return offer;
-//    }
-//
-//    public void setOffer(Offer offer) {
-//        this.offer = offer;
-//    }
-
-    //    public StreamedContent getDbImage() {
-//        return dbImage;
-//    }
-//
-//    public void setDbImage(StreamedContent dbImage) {
-//        this.dbImage = dbImage;
-//    }
 }

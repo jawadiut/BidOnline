@@ -77,9 +77,6 @@ public class UserDaoImpl implements UserDao{
         return user;
     }
 
-//    @Override
-//    public Integer getUserByItemId(int itemId){
-//        return em.createQuery("select u.userId from User u where ")
-//    }
+
 
 }

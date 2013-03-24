@@ -20,8 +20,7 @@ public class Bid {
     private Integer bidPrice;
     private Integer userId;
     private Integer itemId;
-//    private Integer userId;
-//    private Integer offerId;
+
 
     public Integer getBidId() {
         return bidId;
@@ -65,11 +64,5 @@ public class Bid {
 
 
 
-//    public Integer getBidPrice() {
-//        return bidPrice;
-//    }
-//
-//    public void setBidPrice(Integer bidPrice) {
-//        this.bidPrice = bidPrice;
-//    }
+
 }

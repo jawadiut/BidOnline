@@ -29,7 +29,7 @@ public class ItemWiseBidListController {
     private String itemCategory;
     private Item item;
     private Bid bid;
-    //private Offer offer;
+
     private User user;
     private List<Bid> bidList;
     private List<User> bidderList;

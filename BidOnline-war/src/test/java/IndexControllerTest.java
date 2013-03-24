@@ -30,15 +30,7 @@ public class IndexControllerTest {
     private ExternalContext externalContext;
     private UserDao userDao;
     private User user,user1;
-//    @Deployment
-//    public static Archive<?> createDeployment() {
-//        Archive archive = ShrinkWrap.create(JavaArchive.class, "login-controller.jar")
-//                .addPackage(User.class.getPackage());
-//
-//        System.out.println("LoginControllerTest: " + archive.toString(true));
-//
-//        return archive;
-//    }
+
 
 
     @Before

@@ -27,7 +27,7 @@ public class PendingOffersController {
     private User user;
     private Item item;
     private List<Item> itemList;
-    //private List<NewItem> newItemList;
+
 
 
     @EJB

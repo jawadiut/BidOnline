@@ -33,8 +33,10 @@ public class MyPendingListController {
     private ItemDao itemDao;
     @EJB
     private UserDao userDao;
+
     @PostConstruct
     public void init(){
+
         pendingItemList = new ArrayList<Item>();
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession)context.getExternalContext().getSession(false);

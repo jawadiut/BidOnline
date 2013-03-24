@@ -41,10 +41,6 @@ public class HomeControllerTest {
         httpSession = EasyMock.createMock(HttpSession.class);
         itemDao = EasyMock.createMock(ItemDao.class);
         facesContext = ContextMocker.mockFacesContext();
-
-
-
-
     }
 
     @Test
@@ -54,7 +50,6 @@ public class HomeControllerTest {
         EasyMock.replay(facesContext);
         EasyMock.expect(externalContext.getSession(false)).andReturn(httpSession);
         EasyMock.replay(externalContext);
-        //httpSession.invalidate();
         String response = homeController.logout();
         Assert.assertEquals(response,"index.xhtml?faces-redirect=true");
     }

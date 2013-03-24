@@ -49,8 +49,8 @@ public class AvailableOffersController {
 
     @PostConstruct
     public void init() {
-        item = new Item();
 
+        item = new Item();
 
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -69,6 +69,7 @@ public class AvailableOffersController {
         loggedUserId =(Integer) httpSession.getAttribute("loggedUserId");
 
         loggedUserName = (String) httpSession.getAttribute("loggedUserName");
+
     }
 
     public List<Integer> getOfferList() {
@@ -152,6 +153,7 @@ public class AvailableOffersController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
 
         httpSession.setAttribute("userProfileId",userId);
+
         return "userProfile.xhtml?faces-redirect=true";
     }
 

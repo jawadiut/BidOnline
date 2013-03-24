@@ -42,8 +42,7 @@ public class MyBidListController {
     private BidDao bidDao;
     @PostConstruct
     public void init() {
-        //item = new Item();
-        //itemList = new ArrayList<Item>();
+
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         loggedUserId = (Integer) httpSession.getAttribute("loggedUserId");
@@ -52,7 +51,7 @@ public class MyBidListController {
         itemList = user.getBidItems();
         user = userDao.getUserWithBids((Integer)httpSession.getAttribute("loggedUserId"));
         bidList = user.getBids();
-        System.out.println("bidList..."+bidList);
+
     }
 
     public User getUser() {
