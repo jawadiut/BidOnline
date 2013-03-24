@@ -128,6 +128,7 @@ public class ItemDetailsController {
         return "home.xhtml?faces-redirect=true";
     }
     public String logout(){
+
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
         httpSession.invalidate();
@@ -144,6 +145,7 @@ public class ItemDetailsController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         httpSession.setAttribute("loggedItemCategory",itemType);
+
         return "offersByCategory.xhtml?faces-redirect=true";
     }
 }

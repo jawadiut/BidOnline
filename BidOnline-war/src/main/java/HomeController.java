@@ -100,7 +100,7 @@ public class HomeController {
     public String logout(){
 
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
 //        System.out.println(user.getUserName()+);

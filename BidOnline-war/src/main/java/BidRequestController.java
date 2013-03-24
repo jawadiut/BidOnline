@@ -1,7 +1,6 @@
 import com.bo.ejb.*;
 import com.bo.entity.Bid;
 import com.bo.entity.Item;
-
 import com.bo.entity.User;
 
 import javax.annotation.PostConstruct;

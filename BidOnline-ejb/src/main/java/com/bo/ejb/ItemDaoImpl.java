@@ -30,8 +30,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public void uploadItem(Integer userId,Item item){
+
         User user = entityManager.find(User.class,userId);
-        //System.out.println("user info: "+userId+","+user);
         user.getItems().add(item);
         System.out.println("In uploadItem......"+item.getItemTitle());
 
@@ -40,20 +40,23 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item findItemById(int itemId){
+
         return entityManager.find(Item.class,itemId);
     }
 
     @Override
     public void deleteItem(int itemId){
+
         Item item = findItemById(itemId);
         entityManager.remove(item);
+
     }
 
     @Override
     public void updateItem(Item item){
 
-        //Item item = entityManager.find(Item.class,itemId);
         entityManager.merge(item);
+
     }
 
     @Override
@@ -75,13 +78,15 @@ public class ItemDaoImpl implements ItemDao {
         System.out.println("In getItem method: ");
         Item item = entityManager.find(Item.class,itemId);
         System.out.println("iteminfo...."+item);
-        return item;//To change body of implemented methods use File | Settings | File Templates.
+        return item;
     }
+
     @Override
     public List<Item> getItems(){
         return entityManager.createQuery("select i from Item i where i.itemStatus LIKE :active")
                 .setParameter("active","active").getResultList();
     }
+
     @Override
     public List<Item> getPendingItems(){
         return entityManager.createQuery("select i from Item i where i.itemStatus LIKE :pending")

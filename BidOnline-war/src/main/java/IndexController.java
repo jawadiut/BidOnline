@@ -58,6 +58,14 @@ public class IndexController {
         return itemList;
     }
 
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     @PostConstruct
     public void init(){
         itemList = new ArrayList<Item>();
@@ -66,6 +74,7 @@ public class IndexController {
             itemList = itemDao.getItems();
         }
     }
+
     public String loginUser(){
 
         User loggedUser = userDao.authenticateUser(user);
@@ -74,7 +83,7 @@ public class IndexController {
 
             FacesContext context = FacesContext.getCurrentInstance();
 
-            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
 
             httpSession.setAttribute("loggedUserId",loggedUser.getUserId());
             httpSession.setAttribute("loggedUserName",loggedUser.getUserName());

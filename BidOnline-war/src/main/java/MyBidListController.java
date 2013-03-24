@@ -13,7 +13,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +31,6 @@ public class MyBidListController {
     private String itemCategory;
     private List<Item> itemList;
     private List<Bid> bidList;
-    //private List<Offer> offerList;
     private Integer loggedUserId;
     private String loggedUserName;
     private StreamedContent streamedContent;

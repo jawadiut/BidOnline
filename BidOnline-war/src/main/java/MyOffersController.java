@@ -104,17 +104,6 @@ public class MyOffersController {
         return "itemWiseBidList.xhtml?faces-redirect=true";
     }
 
-
-//    public String showItemDetails(Integer itemId) {
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-//        httpSession.setAttribute("loggedItemId", itemId);
-//        if (httpSession.getAttribute("loggedUserId") != null) {
-//            return "bidRequest.xhtml?faces-redirect=true";
-//        }
-//        return "mustLogin.xhtml?faces-redirect=true";
-//    }
-
     public String showItemList(String itemType){
         System.out.println("itemType...."+itemType);
         FacesContext context = FacesContext.getCurrentInstance();

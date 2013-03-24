@@ -35,7 +35,6 @@ public class Item implements Serializable {
 
     private String itemCondition;
 
-
     private String itemDescription;
 
     private String itemType;

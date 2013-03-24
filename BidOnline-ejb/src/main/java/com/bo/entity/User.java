@@ -14,6 +14,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
+@Table(name = "UserInfo")
 public class User implements Serializable {
     @Id
     @GeneratedValue
