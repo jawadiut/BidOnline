@@ -28,11 +28,10 @@ public class SignupController {
 
     @PostConstruct
     public void init(){
-        System.out.println("init started....");
+
         if(user==null){
             user = new User();
-            System.out.println(user);
-            System.out.println("userdao-init-2..."+userDao);
+
         }
     }
 
@@ -40,10 +39,6 @@ public class SignupController {
 
         user.setRole(1);
 
-        System.out.println("user being saved....:" + user.getUserName() + "," + user.getPermanentAddress() + "," + user.getUserId() + "," + user.getRole() + "," + user.getPresentAddress()
-                + "," + user.getEmail() + "," + user.getPassword() + "," + user.getPhoneNumber());
-        System.out.println(user);
-        System.out.println("userdao..."+userDao);
 
         userDao.saveUser(user);
 

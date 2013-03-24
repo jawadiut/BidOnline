@@ -134,7 +134,7 @@ public class AvailableOffersController {
 
 
     public String offeredItemDetails(int itemId) {
-        //item = itemDao.getItem(itemId);
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
@@ -148,6 +148,7 @@ public class AvailableOffersController {
     }
 
     public String seeUserProfile(int userId){
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
@@ -158,6 +159,7 @@ public class AvailableOffersController {
     }
 
     public String logout(){
+
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         httpSession.invalidate();
@@ -165,6 +167,7 @@ public class AvailableOffersController {
     }
 
     public String recent(){
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
@@ -174,6 +177,7 @@ public class AvailableOffersController {
     }
 
     public String top(){
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);

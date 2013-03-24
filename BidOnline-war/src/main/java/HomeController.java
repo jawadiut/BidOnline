@@ -133,9 +133,6 @@ public class HomeController {
 
             httpSession.setAttribute("loggedItemId", itemId);
 
-            //httpSession.setAttribute("loggedOfferId",offerId);
-            //loggedUserName = (String)httpSession.getAttribute("loggedUserName");
-
             return "bidRequest.xhtml?faces-redirect=true";
         }
         return "mustLogin.xhtml?faces-redirect=true";

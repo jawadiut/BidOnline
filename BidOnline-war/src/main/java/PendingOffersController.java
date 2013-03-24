@@ -75,21 +75,7 @@ public class PendingOffersController {
         return loggedUserName;
     }
 
-    //    public List<NewItem> getNewItemList() {
-//        return newItemList;
-//    }
-//
-//    public void setNewItemList(List<NewItem> newItemList) {
-//        this.newItemList = newItemList;
-//    }
 
-//    public NewItem getNewItem() {
-//        return newItem;
-//    }
-//
-//    public void setNewItem(NewItem newItem) {
-//        this.newItem = newItem;
-//    }
 
 
 

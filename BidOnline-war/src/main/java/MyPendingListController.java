@@ -94,6 +94,6 @@ public class MyPendingListController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
-//        System.out.println(user.getUserName()+);
+
     }
 }

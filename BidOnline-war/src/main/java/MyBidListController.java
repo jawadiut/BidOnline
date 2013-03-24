@@ -86,14 +86,6 @@ public class MyBidListController {
         this.bidList = bidList;
     }
 
-    //    public List<Offer> getOfferList() {
-//        return offerList;
-//    }
-//
-//    public void setOfferList(List<Offer> offerList) {
-//        this.offerList = offerList;
-//    }
-
     public String getLoggedUserName() {
         return loggedUserName;
     }
@@ -130,9 +122,6 @@ public class MyBidListController {
 
             httpSession.setAttribute("loggedItemId", itemId);
 
-            //httpSession.setAttribute("loggedOfferId",offerId);
-            //loggedUserName = (String)httpSession.getAttribute("loggedUserName");
-
             return "bidRequest.xhtml?faces-redirect=true";
         }
         return "mustLogin.xhtml?faces-redirect=true";
@@ -144,7 +133,7 @@ public class MyBidListController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
         httpSession.invalidate();
         return "index.xhtml?faces-redirect=true";
-//        System.out.println(user.getUserName()+);
+
     }
     public StreamedContent getStreamedContent() {
         return streamedContent;
