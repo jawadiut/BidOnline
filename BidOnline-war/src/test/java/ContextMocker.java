@@ -18,14 +18,18 @@ public abstract class ContextMocker extends FacesContext {
     }
 
     public static FacesContext mockFacesContext() {
+
         FacesContext context = EasyMock.createMock(FacesContext.class);
         setCurrentInstance(context);
         return context;
+
     }
 
     @Override
     public ExternalContext getExternalContext() {
+
         ExternalContext context = EasyMock.createMock(ExternalContext.class);
         return context;
+
     }
 }

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  * To change this template use File | Settings | File Templates.
  */
 public class AvailableOffersControllerTest {
+
     private AvailableOffersController availableOffersController;
     private HttpSession httpSession;
     private FacesContext facesContext;

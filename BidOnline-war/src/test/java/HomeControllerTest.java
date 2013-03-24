@@ -41,8 +41,26 @@ public class HomeControllerTest {
         httpSession = EasyMock.createMock(HttpSession.class);
         itemDao = EasyMock.createMock(ItemDao.class);
         facesContext = ContextMocker.mockFacesContext();
+
+        item = new Item();
+        item.setItemId(1);
+        item.setItemTitle("Marcidize");
     }
 
+    @Test
+    public void offeredItemDetailsTest(){
+
+        EasyMock.expect(facesContext.getExternalContext()).andReturn(externalContext);
+        EasyMock.replay(facesContext);
+        EasyMock.expect(externalContext.getSession(true)).andReturn(httpSession);
+        EasyMock.replay(externalContext);
+
+        //httpSession.setAttribute("loggedUserId",user.getUserId());
+        httpSession.setAttribute("loggedItemId", item.getItemId());
+
+        String response = homeController.offeredItemDetails(item.getItemId());
+        Assert.assertEquals(response,"mustLogin.xhtml?faces-redirect=true");
+    }
     @Test
     public void logoutTest(){
 
