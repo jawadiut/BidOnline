@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ItemDaoTest {
+
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -48,29 +49,7 @@ public class ItemDaoTest {
         utx.commit();
     }
 
-//    private void insertItem() throws Exception{
-//        System.out.println("inserting item....");
-//        utx.begin();
-//        em.joinTransaction();
-//        Item item = new Item();
-//        item.setItemType("Electronics");
-//        item.setItemTitle("Core-I7");
-//        item.setItemStatus("pending");
-//        item.setItemLatestBid(0);
-//        item.setItemBidHistory(0);
-//        item.setItemCondition("new");
-//        item.setItemImage(null);
-//        item.setItemDescription("Mitsubishi");
-//        item.setItemStartingPrice(1000);
-//        item.setItemFixedPrice(2000);
-//        item.setItemUploadDate(Calendar.getInstance().getTime());
-//        item.setItemExpireDate(Calendar.getInstance().getTime());
-//        item.setItemSubtitle("Corolla");
-//        em.persist(item);
-//        utx.commit();
-//        em.clear();
-//        //item.setUserId(1);
-//    }
+
 
     private void insertUser() throws Exception {
 
@@ -155,16 +134,6 @@ public class ItemDaoTest {
         //utx.commit();
         Assert.assertEquals((Object) item.getItemId(),1);
     }
-
-//    @Test
-//    @InSequence(value = 2)
-//    public void deleteItemTest() throws Exception{
-//        utx.begin();
-//        Item item = em.find(Item.class,1);
-//        em.remove(item);
-//        utx.commit();
-//        Assert.assertEquals((Object) item.getItemId(),1);
-//    }
 
     @Test
     @InSequence(value = 3)
