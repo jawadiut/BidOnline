@@ -34,12 +34,14 @@ public class MyBidListController {
     private Integer loggedUserId;
     private String loggedUserName;
     private StreamedContent streamedContent;
+
     @EJB
     private UserDao userDao;
     @EJB
     private ItemDao itemDao;
     @EJB
     private BidDao bidDao;
+
     @PostConstruct
     public void init() {
 
@@ -109,14 +111,16 @@ public class MyBidListController {
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         httpSession.setAttribute("loggedItemCategory",itemType);
+
         return "offersByCategory.xhtml?faces-redirect=true";
+
     }
 
     public String offeredItemDetails(int itemId) {
         //item = itemDao.getItem(itemId);
         FacesContext context = FacesContext.getCurrentInstance();
 
-        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
 
         if (loggedUserId != null) {
 
@@ -130,9 +134,9 @@ public class MyBidListController {
     public String logout(){
 
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(true);
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         httpSession.invalidate();
-        return "index.xhtml?faces-redirect=true";
+        return "logout successful";
 
     }
     public StreamedContent getStreamedContent() {

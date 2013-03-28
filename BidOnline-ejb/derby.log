@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Mar 28 14:31:34 BDT 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-013d-b01f-9bed-00000ae38480 
+Thu Mar 28 15:07:18 BDT 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-013d-b040-50a4-00000ae28818 
 on database directory /home/jawad/BidOnline/BidOnline-ejb/target/databases/derby  with class loader sun.misc.Launcher$AppClassLoader@3182f0db 
 Loaded from file:/home/jawad/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/3.1.2/glassfish-embedded-all-3.1.2.jar
 java.vendor=Sun Microsystems Inc.

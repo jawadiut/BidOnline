@@ -52,8 +52,8 @@
                                              action="#{itemWiseBidListController.showItemList(itemWiseBidListController.itemCategory)}"/>
                             <p:spacer width="30px"/>
                             <h:form>
-                            <p:commandButton rendered="#{itemWiseBidListController.loggedUserId != null}"
-                                             value="logout" action="#{itemWiseBidListController.logout}"/>
+                            <p:commandButton rendered="#{homeController.loggedUserId != null}"
+                                             value="logout" action="#{homeController.logout}"/>
                             </h:form>
                         </h:panelGrid>
                     </h:form>
