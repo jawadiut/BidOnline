@@ -31,6 +31,7 @@ public class OffersByCategoryController {
 
     @PostConstruct
     public void init(){
+
         FacesContext context = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
         loggedUserId = (Integer)httpSession.getAttribute("loggedUserId");
@@ -38,6 +39,7 @@ public class OffersByCategoryController {
         itemCategory = (String)httpSession.getAttribute("loggedItemCategory");
         item = new Item();
         itemList = itemDao.getItemByCategory(itemCategory);
+
     }
 
     public User getUser() {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: jawad
+  Date: 3/28/13
+  Time: 10:48 AM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <ui:composition>
+        <div>
+            <h:form>
+                <p:menubar style="color: #add8e6">
+                    <p:submenu label="My Profile">
+                        <p:submenu label="Offers">
+                            <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
+                            <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
+                        </p:submenu>
+
+                        <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
+                        <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
+                        <p:menuitem value="Edit profile"/>
+                    </p:submenu>
+                    <p:submenu label="Available offers">
+
+                        <p:menuitem rendered="#{homeController.userRole == 0}" value="Activate offers"
+                                    outcome="pendingOffers.xhtml"/>
+                        <p:menuitem value="Recent offers" action="#{homeController.recent}"/>
+                        <p:menuitem value="Top offers" action="#{homeController.top}"/>
+
+                    </p:submenu>
+                    <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
+
+                    <p:menuitem value="Home" outcome="home.xhtml"/>
+                </p:menubar>
+            </h:form>
+        </div>
+    </ui:composition>
+</h:body>
+
+</html>

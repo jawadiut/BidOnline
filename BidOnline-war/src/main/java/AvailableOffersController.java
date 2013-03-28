@@ -58,9 +58,11 @@ public class AvailableOffersController {
 
         if(httpSession.getAttribute("recent")!=null){
            itemList = itemDao.getItemByUploadDate();
+            httpSession.removeAttribute("recent");
         }
         else if(httpSession.getAttribute("top")!=null){
             itemList = itemDao.getItemByHighestBids();
+            httpSession.removeAttribute("top");
         }
         else {
             itemList = itemDao.getItems();

@@ -8,6 +8,8 @@ import org.apache.commons.logging.LogFactory;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -28,7 +30,7 @@ public class IndexController {
     private User user;
     private String keyWord;
     private String[] items={"car","motor-cycle","auto-rickshaw","others","house","land","shirt","baby-wearings"
-    ,"shari","shoes","diamond","silver","gold","food"};
+    ,"shari","shoes","diamond","silver","gold","electronics"};
     private List<Item> itemList;
     @EJB
     private UserDao userDao;
@@ -74,6 +76,7 @@ public class IndexController {
             itemList = itemDao.getItems();
         }
     }
+
 
     public String loginUser(){
 

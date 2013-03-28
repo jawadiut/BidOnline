@@ -101,7 +101,6 @@ public class ItemDaoImpl implements ItemDao {
             item = (Item) entityManager.createQuery("SELECT i FROM Item i JOIN FETCH i.bidders WHERE i.itemId=:itemId ")
                     .setParameter("itemId", itemId).getSingleResult();
         } catch (NoResultException ex) {
-            //offer = entityManager.find(Offer.class, offerId);
             item = entityManager.find(Item.class,itemId);
             item.getBidders().size();
         }
@@ -132,13 +131,13 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<Item> getItemByUploadDate(){
-        return entityManager.createQuery("select i from Item i ORDER BY i.itemUploadDate ASC ")
+        return entityManager.createQuery("select i from Item i ORDER BY i.itemUploadDate ASC")
                 .getResultList();
     }
 
     @Override
     public List<Item> getItemByHighestBids(){
-        return entityManager.createQuery("select i from Item i ORDER BY i.itemBidHistory DESC ")
+        return entityManager.createQuery("select i from Item i ORDER BY i.itemBidHistory ASC")
                 .getResultList();
     }
 }

@@ -13,91 +13,35 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Pending Offers</title>
 </h:head>
 
 <h:body>
-    <p:layout fullPage="true">
-        <p:layoutUnit position="north" size="130">
-            <div style="float: right;padding-right: 10px">
-                <p:outputLabel value=" #{pendingOffersController.loggedUserName}"/>
-            </div>
-            <div style="padding-top: 20px">
-                <div style="float: left">
-                    <h2 style="color: #d2691e">BidOnline</h2>
-                </div>
-                <div style="padding-left: 500px;float: right;padding-top: 20px">
-                    <h:form>
-                        <h:panelGrid columns="5">
-                            <p:outputLabel value="Select category" style="color: red"/>
-                            <p:selectOneMenu value="#{pendingOffersController.itemCategory}">
-                                <f:selectItem itemValue="car" itemLabel="car"/>
-                                <f:selectItem itemValue="motor-cycle" itemLabel="Motor-cycle"/>
-                                <f:selectItem itemValue="auto-rickshaw" itemLabel="Auto-rickshaw"/>
-                                <f:selectItem itemValue="house" itemLabel="House"/>
-                                <f:selectItem itemValue="land" itemLabel="Land"/>
-                                <f:selectItem itemValue="shirt" itemLabel="Shirt"/>
-                                <f:selectItem itemValue="baby-wearings" itemLabel="Baby-wearings"/>
-                                <f:selectItem itemValue="shari" itemLabel="Shari"/>
-                                <f:selectItem itemValue="shoes" itemLabel="Shoes"/>
-                                <f:selectItem itemValue="diamond" itemLabel="Diamond"/>
-                                <f:selectItem itemValue="silver" itemLabel="Silver"/>
-                                <f:selectItem itemValue="gold" itemLabel="Gold"/>
-                                <f:selectItem itemValue="others" itemLabel="Others"/>
-                            </p:selectOneMenu>
-                            <p:commandButton value="Search"
-                                             action="#{pendingOffersController.showItemList(pendingOffersController.itemCategory)}"/>
-                            <p:spacer width="30px"/>
+    <!--<p:spacer height="10px"/>-->
+    <ui:composition template="template/commonLayout.xhtml">
 
-                            <p:commandButton rendered="#{pendingOffersController.loggedUserId != null}"
-                                             value="logout" action="#{pendingOffersController.logout}"/>
+        <ui:define name="title">
+            Pending 0ffers
+        </ui:define>
 
-                        </h:panelGrid>
-                    </h:form>
-                </div>
+        <ui:define name="content">
 
-            </div>
-        </p:layoutUnit>
-        <p:layoutUnit position="center">
-            <div align="center">
-                <h2 style="color: #006400">Pending Offers</h2>
-            </div>
-            <h:form rendered="#{offersByCategoryController.loggedUserId != null}">
-                <p:menubar style="color: #add8e6">
-                    <p:submenu label="My Profile">
-                        <p:submenu label="Offers">
-                            <p:menuitem value="Pending offers" outcome="myPendingList.xhtml"/>
-                            <p:menuitem value="Active offers" outcome="myOffers.xhtml"/>
-                        </p:submenu>
-                        <p:menuitem value="Bids" outcome="myBidList.xhtml"/>
-                        <p:menuitem value="Sellings" outcome="itemDetails.xhtml"/>
-                        <p:menuitem value="Edit profile"/>
-                    </p:submenu>
-                    <p:submenu label="Available offers">
-                        <!--<p:menuitem rendered="" value="Activate offers" outcome="pendingOffers.xhtml"/>-->
-                        <p:menuitem value="Recent offers" outcome="availableOffers.xhtml"/>
-                        <p:menuitem value="Top offers"/>
-                    </p:submenu>
-                    <p:menuitem value="Sell an item" outcome="itemDetails.xhtml"/>
-
-                </p:menubar>
-            </h:form>
-            <p:spacer height="10px"/>
-
-
-
-                <div style="width: 400px">
-                    <p:dataList value="#{pendingOffersController.itemList}" var="offers"  rows="5"
+            <div style="padding-left: 200px;padding-top: 20px;padding-right: 200px">
+                <h:form>
+                    <p:dataList value="#{pendingOffersController.itemList}" var="offers" rows="5"
                                 paginator="true"
                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 rowsPerPageTemplate="5,10,15"
-                            type="none">
-                        <h:form>
-                        <!--<ui:param name="myVar" value="0"/>-->
-                        <!--<p:graphicImage value="" height="200" width="200"/>-->
+                                type="none">
+
+                        <f:facet name="header">
+                            Pending offers
+                        </f:facet>
+
                         <div style="background-color: #ffe4c4">
                             <h:panelGrid columns="2">
                                 <p:outputLabel value="Title:"/>
@@ -117,13 +61,16 @@
                                                  action="#{pendingOffersController.closeOffer(offers.itemId)}"/>
                             </h:panelGrid>
                         </div>
-                        </h:form>
+
                         <p:spacer width="10px"/>
                     </p:dataList>
-                </div>
+                </h:form>
+            </div>
+        </ui:define>
 
-        </p:layoutUnit>
-    </p:layout>
+    </ui:composition>
+
+
 </h:body>
 
 </html>

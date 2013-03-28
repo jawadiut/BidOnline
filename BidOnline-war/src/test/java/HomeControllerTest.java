@@ -69,7 +69,7 @@ public class HomeControllerTest {
         EasyMock.expect(externalContext.getSession(false)).andReturn(httpSession);
         EasyMock.replay(externalContext);
         String response = homeController.logout();
-        Assert.assertEquals(response,"index.xhtml?faces-redirect=true");
+        Assert.assertEquals(response,"logout successful");
     }
 
     @Test
